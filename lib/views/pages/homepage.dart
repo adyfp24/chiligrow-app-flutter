@@ -1,7 +1,7 @@
 part of 'page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({ Key? key }) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -10,7 +10,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  void _onItemTapped(int index){
+  void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -19,8 +19,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: [
+      body: const [
         HomeFragment(),
+        PenyiramanFragment(),
+        PemupukanFragment(),
+        SimulasiFragment()
       ][_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: [
@@ -29,20 +32,22 @@ class _HomePageState extends State<HomePage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
+            icon: Icon(Icons.water_outlined),
             label: 'penyiraman',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
+            icon: Icon(Icons.broken_image_outlined),
             label: 'pemupukan',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.pages),
-            label: 'profile',
+            icon: Icon(Icons.query_stats_rounded),
+            label: 'simulasi',
           ),
         ],
+        selectedFontSize: 14, // Ukuran teks saat terpilih
+        unselectedFontSize: 14,
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.lightBlue[100],
+        backgroundColor: Color.fromRGBO(175, 245, 237, 1),
         elevation: 0,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
