@@ -26,28 +26,30 @@ class _HomePageState extends State<HomePage> {
         SimulasiFragment()
       ][_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.water_outlined),
-            label: 'penyiraman',
+            label: 'Penyiraman',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.broken_image_outlined),
-            label: 'pemupukan',
+            label: 'Pemupukan',  
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.query_stats_rounded),
-            label: 'simulasi',
+            label: 'Simulasi',
           ),
         ],
-        selectedFontSize: 14, // Ukuran teks saat terpilih
+        selectedFontSize: 14, 
         unselectedFontSize: 14,
+        selectedItemColor: const Color.fromRGBO(0, 133, 117, 1),
+        unselectedItemColor: Colors.black,
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Color.fromRGBO(175, 245, 237, 1),
+        backgroundColor: const Color.fromRGBO(175, 245, 237, 1),
         elevation: 0,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
