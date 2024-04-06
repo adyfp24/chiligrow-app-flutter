@@ -2,14 +2,14 @@ import 'dart:convert';
 
 class Sensor{
   final int idSensor;
-  final String nilaiKelembapan;
+  final int nilaiKelembapan;
 
   Sensor(this.idSensor, this.nilaiKelembapan);
 
   factory Sensor.fromJson(Map<String, dynamic> json) {
     return Sensor(
-      json["id_podcast"] as int,
-      json["judul_podcast"] as String,
+      json["id_sensor"] as int,
+      json["nilai_kelembapan"] as int,
     );
   }
 

@@ -1,5 +1,7 @@
 import 'package:chiligrow_app/views/pages/page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:chiligrow_app/providers/provider.dart';
 import 'package:chiligrow_app/views/fragments/fragment.dart';
 import './utils/utils.dart';
 
@@ -13,16 +15,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(),
-      home: HomePage(
-        key: homepageKey,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => SensorProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Chiligrow App',
+        theme: ThemeData(),
+        home: HomePage(
+          key: homepageKey,
+        ),
       ),
-      // routes: {
-      //   "/penyiraman" : (context)=> PenyiramanFragment(),
-      // },
     );
   }
 }

@@ -1,4 +1,4 @@
-part of 'fragment.dart';
+part of 'fragment.dart'; // Sesuaikan dengan path file provider Anda
 
 class PenyiramanFragment extends StatelessWidget {
   const PenyiramanFragment({Key? key}) : super(key: key);
@@ -25,115 +25,128 @@ class PenyiramanFragment extends StatelessWidget {
         elevation: 0,
       ),
       body: Center(
-        child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-          children: [
-            Text(
-              'Nilai kelembapan tanah',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-              textAlign: TextAlign.center,
-            ),
-            Align(
-              child: Container(
-                width: 240,
-                height: 200,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('img/speedo.png'), fit: BoxFit.contain),
-                ),
-              ),
-            ),
-            Text(
-              '307',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(
-              height: 25,
-            ),
-            Align(
-              child: Container(
-                width: 240,
-                height: 50,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color.fromRGBO(175, 245, 237, 1)),
-                child: Center(
-                  child: Text(
-                    'Kondisi tanah basah',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
+        child: Consumer<SensorProvider>(
+          builder: (context, sensorProvider, _) {
+            if (sensorProvider.isLoading) {
+              return CircularProgressIndicator();
+            } else {
+              return ListView(
+                shrinkWrap: true,
+                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                children: [
+                  Text(
+                    'Nilai kelembapan tanah',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.center,
+                  ),
+                  Align(
+                    child: Container(
+                      width: 240,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('img/speedo.png'),
+                          fit: BoxFit.contain,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 110,
-                  height: 120,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color.fromRGBO(0, 133, 117, 1),
+                  Text(
+                    '${sensorProvider.dataSensor.isNotEmpty ? sensorProvider.dataSensor.first.nilaiKelembapan.toString() : 'N/A'} (nilai kelembapan)',
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Pompa',
-                        style: TextStyle(color: Colors.white),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Align(
+                    child: Container(
+                      width: 240,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Color.fromRGBO(175, 245, 237, 1),
                       ),
-                      SizedBox(height: 10),
-                      Text(
-                        'OFF',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25,
-                            color: Colors.white),
+                      child: Center(
+                        child: Text(
+                          'Kondisi tanah basah',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 110,
+                        height: 120,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Color.fromRGBO(0, 133, 117, 1),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Pompa',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              'OFF',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Container(
+                        width: 110,
+                        height: 120,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Color.fromRGBO(0, 133, 117, 1),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Air',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              'MATI',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Container(
-                  width: 110,
-                  height: 120,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color.fromRGBO(0, 133, 117, 1),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Air',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'MATI',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25,
-                            color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              );
+            }
+          },
         ),
       ),
     );
