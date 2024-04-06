@@ -5,14 +5,16 @@ class HomeFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return ListView(
+      padding: EdgeInsets.symmetric(horizontal: 25),
+      shrinkWrap: true,
+      scrollDirection: Axis.vertical, // Tambahkan scrollDirection
       children: [
         SizedBox(
           height: 20,
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,23 +30,23 @@ class HomeFragment extends StatelessWidget {
                     icon: Icon(Icons.notification_add_sharp),
                   ),
                   Container(
-                        width: 40,
-                        height: 40,
-                        margin: EdgeInsets.only(top: 0, right: 10),
-                        child: ClipOval(
-                          child: Image.asset(
-                            'img/profil.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                    width: 40,
+                    height: 40,
+                    margin: EdgeInsets.only(top: 0, right: 0),
+                    child: ClipOval(
+                      child: Image.asset(
+                        'img/profil.png',
+                        fit: BoxFit.cover,
                       ),
+                    ),
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),
         SizedBox(
-          height: 30,
+          height: 25,
         ),
         Container(
           width: 300,
@@ -136,7 +138,7 @@ class HomeFragment extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(
-              width: 31,
+              width: 5,
             ),
             Text(
               'semua fitur',
@@ -155,24 +157,29 @@ class HomeFragment extends StatelessWidget {
           children: [
             Column(
               children: [
-                Container(
-                  width: 140,
-                  height: 120,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(
-                        image: AssetImage('img/penyiraman.png'),
-                        fit: BoxFit.cover),
+                InkWell(
+                  child: Container(
+                    width: 145,
+                    height: 121,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      image: DecorationImage(
+                          image: AssetImage('img/penyiraman.png'),
+                          fit: BoxFit.cover),
+                    ),
                   ),
+                  onTap: () => {
+                    Navigator.pushNamed(context, "/penyiraman")
+                  },
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 Container(
-                  width: 140,
-                  height: 120,
+                  width: 145,
+                  height: 121,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(15),
                     image: DecorationImage(
                         image: AssetImage('img/pemupukan.png'),
                         fit: BoxFit.cover),
@@ -186,10 +193,10 @@ class HomeFragment extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  width: 140,
-                  height: 260,
+                  width: 145,
+                  height: 268,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(12),
                     image: DecorationImage(
                         image: AssetImage('img/simulasi.png'),
                         fit: BoxFit.cover),

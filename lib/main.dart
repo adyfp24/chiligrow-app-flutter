@@ -1,5 +1,6 @@
 import 'package:chiligrow_app/views/pages/page.dart';
 import 'package:flutter/material.dart';
+import 'package:chiligrow_app/views/fragments/fragment.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,6 +27,9 @@ class MyApp extends StatelessWidget {
         // is not restarted.
       ),
       home: const HomePage(),
+      routes: {
+        "/penyiraman" : (context)=> PenyiramanFragment(),
+      },
     );
   }
 }
