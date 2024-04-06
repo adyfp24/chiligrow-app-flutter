@@ -1,8 +1,8 @@
 part of './provider.dart';
 
 class SensorProvider extends ChangeNotifier {
-  List<Sensor> _dataSensor = [];
-  List<Sensor> get dataSensor => _dataSensor;
+  late Sensor _dataSensor;
+  Sensor get dataSensor => _dataSensor;
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -15,9 +15,9 @@ class SensorProvider extends ChangeNotifier {
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
-        final List<dynamic> jsonResponse = json.decode(response.body)['data'];
-        _dataSensor =
-            jsonResponse.map((data) => Sensor.fromJson(data)).toList();
+        final Map<String, dynamic> jsonResponse = json.decode(response.body);
+        final Map<String, dynamic> data= jsonResponse['data'];
+        _dataSensor = Sensor.fromJson(data);
       } else {
         throw Exception('Failed to load sensor data');
       }

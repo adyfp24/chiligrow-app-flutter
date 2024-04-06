@@ -5,6 +5,7 @@ class PenyiramanFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<SensorProvider>(context, listen: false).getDataSensor();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -52,7 +53,7 @@ class PenyiramanFragment extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${sensorProvider.dataSensor.isNotEmpty ? sensorProvider.dataSensor.first.nilaiKelembapan.toString() : 'N/A'} (nilai kelembapan)',
+                    '${sensorProvider.dataSensor != null ? sensorProvider.dataSensor.nilaiKelembapan.toString() : 'N/A'}',
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
