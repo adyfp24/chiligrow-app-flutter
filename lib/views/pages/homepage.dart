@@ -4,13 +4,13 @@ class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePage> createState() => HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  void _onItemTapped(int index) {
+  void setSelectedIndex(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: const Color.fromRGBO(175, 245, 237, 1),
         elevation: 0,
         currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+        onTap: setSelectedIndex,
       ),
     );
   }

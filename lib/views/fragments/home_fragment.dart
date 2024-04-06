@@ -168,42 +168,46 @@ class HomeFragment extends StatelessWidget {
                           fit: BoxFit.cover),
                     ),
                   ),
-                  onTap: () => {
-                    Navigator.pushNamed(context, "/penyiraman")
-                  },
+                  onTap: () => {homepageKey.currentState?.setSelectedIndex(1)},
                 ),
                 SizedBox(
                   height: 20,
                 ),
-                Container(
-                  width: 145,
-                  height: 121,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    image: DecorationImage(
-                        image: AssetImage('img/pemupukan.png'),
-                        fit: BoxFit.cover),
+                InkWell(
+                  child: Container(
+                    width: 145,
+                    height: 121,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      image: DecorationImage(
+                          image: AssetImage('img/pemupukan.png'),
+                          fit: BoxFit.cover),
+                    ),
                   ),
+                  onTap: () => {homepageKey.currentState?.setSelectedIndex(2)},
                 ),
               ],
             ),
             SizedBox(
               width: 20,
             ),
-            Column(
-              children: [
-                Container(
-                  width: 145,
-                  height: 268,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    image: DecorationImage(
-                        image: AssetImage('img/simulasi.png'),
-                        fit: BoxFit.cover),
+            InkWell(
+              child: Column(
+                children: [
+                  Container(
+                    width: 145,
+                    height: 268,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      image: DecorationImage(
+                          image: AssetImage('img/simulasi.png'),
+                          fit: BoxFit.cover),
+                    ),
                   ),
-                ),
-              ],
-            )
+                ],
+              ),
+              onTap: () => {homepageKey.currentState?.setSelectedIndex(3)},
+            ),
           ],
         )
       ],

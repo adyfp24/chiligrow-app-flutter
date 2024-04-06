@@ -20,9 +20,7 @@ class PenyiramanFragment extends StatelessWidget {
         ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            
-          },
+          onPressed: () => {homepageKey.currentState!.setSelectedIndex(0)},
         ),
         elevation: 0,
       ),
