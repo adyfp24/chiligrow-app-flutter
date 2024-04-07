@@ -9,8 +9,7 @@ class DetailRegist extends StatelessWidget {
     final TextEditingController _passwordController = TextEditingController();
     final TextEditingController _addressController = TextEditingController();
     final TextEditingController _emailController = TextEditingController();
-    final TextEditingController _phoneNumberController =
-        TextEditingController();
+    final TextEditingController _phoneNumberController = TextEditingController();
     final TextEditingController _roleController = TextEditingController();
 
     return Scaffold(
