@@ -1,7 +1,7 @@
 part of './provider.dart';
 
 class UserProvider extends ChangeNotifier {
-  late List<User> _users;
+  List<User> _users = [];
   List<User> get users => _users;
 
   bool _isLoading = false;
@@ -21,10 +21,11 @@ class UserProvider extends ChangeNotifier {
         body: jsonEncode(newUser.toJson()),
       );
       if (response.statusCode == 201) {
-        final responseData = json.decode(response.body);
+        final responseData = json.decode(response.body)['data'];
         print(responseData); // optional, for debugging
         // Add new user to local list if registration successful
         _users.add(User.fromJson(responseData));
+         notifyListeners();
       } else {
         throw Exception('Failed to register user');
       }

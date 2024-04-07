@@ -1,16 +1,16 @@
 part of '../page.dart';
 
 class DetailRegist extends StatelessWidget {
-  const DetailRegist({ Key? key }) : super(key: key);
+  const DetailRegist({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    
     final TextEditingController _usernameController = TextEditingController();
     final TextEditingController _passwordController = TextEditingController();
     final TextEditingController _addressController = TextEditingController();
     final TextEditingController _emailController = TextEditingController();
-    final TextEditingController _phoneNumberController = TextEditingController();
+    final TextEditingController _phoneNumberController =
+        TextEditingController();
     final TextEditingController _roleController = TextEditingController();
 
     return Scaffold(
@@ -50,7 +50,8 @@ class DetailRegist extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 final newUser = User(
-                  idUser: 0, // You may adjust this according to your backend requirements
+                  idUser:
+                      0, // You may adjust this according to your backend requirements
                   username: _usernameController.text,
                   password: _passwordController.text,
                   alamat: _addressController.text,
@@ -66,7 +67,7 @@ class DetailRegist extends StatelessWidget {
                   );
                 }).catchError((error) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Failed to register user')),
+                    SnackBar(content: Text('Failed to register user: $error')),
                   );
                 });
               },
