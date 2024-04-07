@@ -3,17 +3,20 @@ part of '../page.dart';
 class RegisterPage extends StatelessWidget {
   const RegisterPage({Key? key}) : super(key: key);
 
-  @override
+  void _toDetailRegist(BuildContext context) {
+    Navigator.pushNamed(context, '/regist-detail');
+  }
+
+  @override  
   Widget build(BuildContext context) {
     final TapGestureRecognizer _toLogin = TapGestureRecognizer();
     _toLogin.onTap = () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ),
-      );
+      Navigator.pushNamed(context, '/login');
     };
+  
+    void _toDetailRegist(){
+      Navigator.pushNamed(context, '/regist-detail');
+    }
     return Scaffold(
       backgroundColor: Color(0xFFE1FCF9),
       body: Center(
@@ -48,7 +51,7 @@ class RegisterPage extends StatelessWidget {
                 color: Color(0xFF30E5D0), // Mengatur warna latar belakang
               ),
               child: TextButton(
-                onPressed: () {},
+                onPressed: _toDetailRegist,
                 child: Text(
                   'Mulai Sekarang',
                   style: TextStyle(
@@ -80,7 +83,7 @@ class RegisterPage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF30E5D0),
                         ),
-                        recognizer: null),
+                        recognizer: _toLogin),
                   ],
                 ),
               ),

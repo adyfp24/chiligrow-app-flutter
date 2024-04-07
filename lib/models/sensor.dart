@@ -1,10 +1,13 @@
-import 'dart:convert';
+part of 'model.dart';
 
-class Sensor{
+class Sensor {
   final int idSensor;
   final int nilaiKelembapan;
 
-  Sensor(this.idSensor, this.nilaiKelembapan);
+  Sensor(
+    this.idSensor,
+    this.nilaiKelembapan,
+  );
 
   factory Sensor.fromJson(Map<String, dynamic> json) {
     return Sensor(
