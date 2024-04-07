@@ -23,9 +23,16 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Chiligrow App',
         theme: ThemeData(),
-        home: HomePage(
-          key: homepageKey,
-        ),
+        // home: HomePage(
+        //   key: homepageKey,
+        // ),
+        home: RegisterPage(),
+        routes: {
+          '/' : (context) => SplashScreen(),
+          '/regist' : (context) => RegisterPage(),
+          '/regist-detail' : (context) => DetailRegist(),
+          '/login' : (context) => LoginPage(),
+        },
       ),
     );
   }
