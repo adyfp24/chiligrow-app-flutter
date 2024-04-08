@@ -7,8 +7,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final TapGestureRecognizer _tapGestureRecognizer = TapGestureRecognizer();
     _tapGestureRecognizer.onTap = () {
-      Navigator.pushNamed(
-          context, '/regist');
+      Navigator.pushNamed(context, '/regist');
     };
     final TextEditingController _usernameController = TextEditingController();
     final TextEditingController _passwordController = TextEditingController();
@@ -67,7 +66,6 @@ class LoginPage extends StatelessWidget {
                         prefixIcon: Icon(Icons.lock),
                         labelText: 'Password'),
                   ),
-                  
                   SizedBox(height: 20),
                   Container(
                     width: double.infinity,
@@ -75,27 +73,29 @@ class LoginPage extends StatelessWidget {
                     child: TextButton(
                       onPressed: () {
                         final user = User(
-                  idUser: 0, // Dummy ID, tidak diperlukan untuk login
-                  username: _usernameController.text,
-                  password: _passwordController.text,
-                  alamat: '', // Tidak diperlukan untuk login
-                  email: '', // Tidak diperlukan untuk login
-                  noHP: '', // Tidak diperlukan untuk login
-                  role: '', // Tidak diperlukan untuk login
-                );
+                          idUser: 0, // Dummy ID, tidak diperlukan untuk login
+                          username: _usernameController.text,
+                          password: _passwordController.text,
+                          alamat: '', // Tidak diperlukan untuk login
+                          email: '', // Tidak diperlukan untuk login
+                          noHP: '', // Tidak diperlukan untuk login
+                          role: '', // Tidak diperlukan untuk login
+                        );
                         Provider.of<UserProvider>(context, listen: false)
-                            .registerUser(user)
-                            .then((_) {
+                            .loginUser(user)
+                            .then((_) async {
+                          final prefs = FlutterSecureStorage();
+                          final token = await prefs.read(key: 'token');
+                          print(token);
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                                content: Text('User login successfully')),
+                            SnackBar(content: Text('User login successfully')),
                           );
                           Navigator.pushNamed(context, '/home');
                         }).catchError((error) {
+                          print(error);
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                                content:
-                                    Text('Failed to login user: $error')),
+                                content: Text('Failed to login user: $error')),
                           );
                         });
                       },
@@ -120,25 +120,24 @@ class LoginPage extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   Align(
-                        alignment: Alignment.center,
-                        child: Text.rich(
+                    alignment: Alignment.center,
+                    child: Text.rich(
+                      TextSpan(
+                        text: 'Belum memiliki akun? ',
+                        style: TextStyle(color: Colors.grey, fontSize: 18),
+                        children: [
                           TextSpan(
-                            text: 'Belum memiliki akun? ',
-                            style: TextStyle(color: Colors.grey, fontSize:18),
-                            children: [
-                              TextSpan(
-                                  text: 'Daftar',
-                                  style: TextStyle(
-                                    fontSize:18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF30E5D0),
-                                  
-                                  ),
-                                  recognizer: _tapGestureRecognizer),
-                            ],
-                          ),
-                        ),
+                              text: 'Daftar',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF30E5D0),
+                              ),
+                              recognizer: _tapGestureRecognizer),
+                        ],
                       ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -146,6 +145,5 @@ class LoginPage extends StatelessWidget {
         ],
       ),
     );
-    
   }
 }

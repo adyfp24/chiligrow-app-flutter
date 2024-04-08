@@ -4,6 +4,12 @@ class UserProvider extends ChangeNotifier {
   List<User> _users = [];
   List<User> get users => _users;
 
+  late final FlutterSecureStorage _secureStorage;
+  UserProvider() : _secureStorage = FlutterSecureStorage();
+
+  String? _token;
+  String? get token => _token;
+
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
@@ -53,7 +59,9 @@ class UserProvider extends ChangeNotifier {
       );
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body);
+        _token = responseData['token'];
         print(responseData); // optional, for debugging
+        await _secureStorage.write(key: 'token', value: _token!);
       } else {
         throw Exception('Failed to login');
       }
