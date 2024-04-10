@@ -1,11 +1,18 @@
 part of './provider.dart';
 
 class SensorProvider extends ChangeNotifier {
-  late Sensor _dataSensor;
-  Sensor get dataSensor => _dataSensor;
+  late ValueNotifier<Sensor> _dataSensorNotifier;
+  Sensor get dataSensor => _dataSensorNotifier.value;
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+
+  SensorProvider() {
+    _dataSensorNotifier = ValueNotifier(Sensor(0, 0));
+  }
+
+  ValueNotifier<Sensor> get dataSensorNotifier => _dataSensorNotifier;
+
 
   Future<void> getDataSensor() async {
     _isLoading = true;
@@ -17,7 +24,7 @@ class SensorProvider extends ChangeNotifier {
       if (response.statusCode == 200) {
         final Map<String, dynamic> jsonResponse = json.decode(response.body);
         final Map<String, dynamic> data= jsonResponse['data'];
-        _dataSensor = Sensor.fromJson(data);
+        _dataSensorNotifier.value = Sensor.fromJson(data);
       } else {
         throw Exception('Failed to load sensor data');
       }
