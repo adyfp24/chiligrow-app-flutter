@@ -12,3 +12,4 @@ part 'auth/register.dart';
 part 'auth/detail_regist.dart';
 part 'auth/login.dart';
 part 'splash_screen.dart';
+part 'profile/profile.dart';

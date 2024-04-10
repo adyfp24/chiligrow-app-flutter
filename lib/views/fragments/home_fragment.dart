@@ -29,16 +29,21 @@ class HomeFragment extends StatelessWidget {
                     onPressed: () {},
                     icon: Icon(Icons.notification_add_sharp),
                   ),
-                  Container(
-                    width: 40,
-                    height: 40,
-                    margin: EdgeInsets.only(top: 0, right: 0),
-                    child: ClipOval(
-                      child: Image.asset(
-                        'img/profil.png',
-                        fit: BoxFit.cover,
+                  InkWell(
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      margin: EdgeInsets.only(top: 0, right: 0),
+                      child: ClipOval(
+                        child: Image.asset(
+                          'img/profil.png',
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
+                    onTap: (){
+                      Navigator.pushNamed(context, '/profile');
+                    },
                   ),
                 ],
               ),

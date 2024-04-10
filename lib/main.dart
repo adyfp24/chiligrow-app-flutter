@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
           '/regist-detail' : (context) => DetailRegist(),
           '/login' : (context) => LoginPage(),
           '/home' : (context) => HomePage(key: homepageKey),
+          '/profile' : (context) => ProfilePage(),
         },
       ),
     );
