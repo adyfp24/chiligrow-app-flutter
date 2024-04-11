@@ -85,7 +85,7 @@ class UserProvider extends ChangeNotifier {
         url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjEsImlhdCI6MTcxMjgzMzYwMH0.9jykRhG0riCmqcmHFpRaIDaRu7uOD8BTYKN59e3YOJs',
+          'Authorization': 'Bearer ${_token}',
         },
       );
       if (response.statusCode == 200) {
@@ -103,4 +103,50 @@ class UserProvider extends ChangeNotifier {
     _isLoading = false;
     notifyListeners();
   }
+
+  Future<void> updateProfile(User user) async {
+    _isLoading = true;
+    notifyListeners();
+
+    final url = Uri.parse('http://localhost:4000/api/v1/profile');
+    try {
+      final response = await http.put(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${_token}',
+        },
+        body: jsonEncode(user.toJson()),
+      );
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body);
+        _users.add(User.fromJson(responseData['data']));
+        print(responseData); // optional, for debugging
+        
+        // await _secureStorage.write(key: 'token', value: _token!);
+      } else {
+        throw Exception('Failed to update');
+      }
+    } catch (e) {
+      print('Error logging in: $e');
+      throw Exception('Failed to update');
+    }
+
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  // Future<void> logoutUser() async {
+  //   _isLoading = true;
+  //   notifyListeners();
+
+  
+  //       _users.));
+  //       // optional, for debugging
+        
+    
+
+  //   _isLoading = false;
+  //   notifyListeners();
+  // }
 }

@@ -6,13 +6,21 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final UserProvider userProvider = Provider.of<UserProvider>(context);
+
+    // Perbarui pengguna setiap kali ada perubahan di UserProvider
+    final List<User> users = userProvider.users;
+    if (users.isEmpty) {
+      // Jika tidak ada pengguna, mungkin Anda ingin menampilkan indikator loading atau pesan lainnya
+      return Center(child: CircularProgressIndicator());
+    }
+    final User loggedInUser = users.first;
     // final TextEditingController _usernameController = TextEditingController();
     final TextEditingController _addressController = TextEditingController();
     final TextEditingController _emailController = TextEditingController();
     final TextEditingController _phoneNumberController =
         TextEditingController();
 
-    final User loggedInUser = userProvider.users.first;
+    // final User loggedInUser = userProvider.users.first;
 
     // Mengisi data pengguna ke dalam TextField
     // _usernameController.text = loggedInUser.username;
@@ -135,7 +143,39 @@ class ProfilePage extends StatelessWidget {
                 color: Color(0xFF30E5D0), // Mengatur warna latar belakang
               ),
               child: TextButton(
-                onPressed: null,
+                onPressed: () {
+                  final user = User(
+                    idUser: loggedInUser
+                        .idUser, // Dummy ID, tidak diperlukan untuk login
+                    username: loggedInUser.username,
+                    password: loggedInUser.password,
+                    alamat:
+                        _addressController.text, // Tidak diperlukan untuk login
+                    email:
+                        _emailController.text, // Tidak diperlukan untuk login
+                    noHP: _phoneNumberController
+                        .text, // Tidak diperlukan untuk login
+                    role: loggedInUser.role, // Tidak diperlukan untuk login
+                  );
+                  Provider.of<UserProvider>(context, listen: false)
+                      .updateProfile(user)
+                      .then((_) async {
+                    // final prefs = FlutterSecureStorage();
+                    // final token = await prefs.read(key: 'token');
+                    // print(token);
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Profile updated successfully')),
+                    );
+                  }).catchError((error) {
+                    print(error);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                          content:
+                              Text('Failed to update credentials: $error')),
+                    );
+                  });
+                },
                 child: Text(
                   'Update Profile',
                   style: TextStyle(
@@ -150,14 +190,19 @@ class ProfilePage extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            Text(
-              'Logout',
-              style: TextStyle(
+            InkWell(
+              child: Text(
+                'Logout',
+                style: TextStyle(
                   color: Colors.black, // Mengatur warna teks
                   fontSize: 15,
                   fontWeight:
-                      FontWeight.bold // Sesuaikan ukuran teks sesuai kebutuhan
-                  ),
+                      FontWeight.bold, // Sesuaikan ukuran teks sesuai kebutuhan
+                ),
+              ),
+              onTap: (){
+                Navigator.pushNamed(context, '/login');
+              },
             ),
           ],
         ),
