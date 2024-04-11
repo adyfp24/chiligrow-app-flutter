@@ -6,17 +6,25 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('profile'),
+        backgroundColor: Colors.white,
+        elevation: 0,
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 20),
-            Text('Profile'),
-            SizedBox(height: 40),
+            Text(
+              'Profile',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 30),
             Container(
               width: 100,
               height: 100,
@@ -25,51 +33,87 @@ class ProfilePage extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
             ),
-            SizedBox(height: 20),
-            Text('Nama User'),
-            SizedBox(height: 25),
+            SizedBox(height: 10),
+            Text(
+              'username',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700),
+            ),
+            SizedBox(height: 30),
+            Align(
+              alignment:Alignment.centerLeft,
+              child: Text(
+              'No. Handphone',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            ),
+            SizedBox(height: 8),
             TextField(
               controller: null,
               decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  prefixIcon: Icon(Icons.person),
-                  labelText: 'Username'),
+                  labelText: 'No. Handphone'),
             ),
             SizedBox(
-              height: 25,
+              height: 20,
             ),
+            Align(
+              alignment:Alignment.centerLeft,
+              child: Text(
+              'Email',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            ),
+            SizedBox(height: 8),          
             TextField(
               controller: null,
               decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  prefixIcon: Icon(Icons.lock),
-                  labelText: 'Password'),
+                  labelText: 'Email'),
             ),
             SizedBox(
-              height: 25,
+              height: 20,
             ),
+            Align(
+              alignment:Alignment.centerLeft,
+              child: Text(
+              'Alamat',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            ),
+            SizedBox(height: 8),
             TextField(
               controller: null,
               decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  prefixIcon: Icon(Icons.lock),
-                  labelText: 'Password'),
+                  labelText: 'Alamat'),
             ),
             SizedBox(
-              height: 60,
+              height: 40,
             ),
             Container(
-              width: 260, // Sesuaikan lebar sesuai kebutuhan
-              height: 60, // Sesuaikan tinggi sesuai kebutuhan
+              width: 150, // Sesuaikan lebar sesuai kebutuhan
+              height: 50, // Sesuaikan tinggi sesuai kebutuhan
               decoration: BoxDecoration(
                 borderRadius:
-                    BorderRadius.circular(25), // Mengatur ujung menjadi bulat
+                    BorderRadius.circular(10), // Mengatur ujung menjadi bulat
                 color: Color(0xFF30E5D0), // Mengatur warna latar belakang
               ),
               child: TextButton(
@@ -78,7 +122,7 @@ class ProfilePage extends StatelessWidget {
                   'Update Profile',
                   style: TextStyle(
                       color: Colors.white, // Mengatur warna teks
-                      fontSize: 20,
+                      fontSize: 15,
                       fontWeight: FontWeight
                           .w600 // Sesuaikan ukuran teks sesuai kebutuhan
                       ),
@@ -88,7 +132,15 @@ class ProfilePage extends StatelessWidget {
             SizedBox(
               height: 25,
             ),
-            Text('logout')
+            Text(
+                  'Logout',
+                  style: TextStyle(
+                      color: Colors.black, // Mengatur warna teks
+                      fontSize: 15,
+                      fontWeight: FontWeight
+                          .w600 // Sesuaikan ukuran teks sesuai kebutuhan
+                      ),
+                ),
           ],
         ),
       ),
