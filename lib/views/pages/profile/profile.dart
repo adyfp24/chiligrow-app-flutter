@@ -5,6 +5,21 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final UserProvider userProvider = Provider.of<UserProvider>(context);
+    // final TextEditingController _usernameController = TextEditingController();
+    final TextEditingController _addressController = TextEditingController();
+    final TextEditingController _emailController = TextEditingController();
+    final TextEditingController _phoneNumberController =
+        TextEditingController();
+
+    final User loggedInUser = userProvider.users.first;
+
+    // Mengisi data pengguna ke dalam TextField
+    // _usernameController.text = loggedInUser.username;
+    _emailController.text = loggedInUser.email;
+    _phoneNumberController.text = loggedInUser.noHP;
+    _addressController.text = loggedInUser.alamat;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -21,7 +36,7 @@ class ProfilePage extends StatelessWidget {
               'Profile',
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: 20,
+                  fontSize: 22,
                   fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 30),
@@ -35,75 +50,78 @@ class ProfilePage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'username',
+              '${loggedInUser.username}',
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.w700),
             ),
             SizedBox(height: 30),
             Align(
-              alignment:Alignment.centerLeft,
+              alignment: Alignment.centerLeft,
               child: Text(
-              'No. Handphone',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+                'No. Handphone',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-            ),
-            SizedBox(height: 8),
+            SizedBox(height: 5),
             TextField(
-              controller: null,
+              controller: _phoneNumberController,
               decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  labelText: 'No. Handphone'),
+                border: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.green), // Opsional: warna garis bawah
+                ),
+              ),
             ),
             SizedBox(
               height: 20,
             ),
             Align(
-              alignment:Alignment.centerLeft,
+              alignment: Alignment.centerLeft,
               child: Text(
-              'Email',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+                'Email',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-            ),
-            SizedBox(height: 8),          
+            SizedBox(height: 5),
             TextField(
-              controller: null,
+              controller: _emailController,
               decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  labelText: 'Email'),
+                border: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.green), // Opsional: warna garis bawah
+                ),
+              ),
             ),
             SizedBox(
               height: 20,
             ),
             Align(
-              alignment:Alignment.centerLeft,
+              alignment: Alignment.centerLeft,
               child: Text(
-              'Alamat',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+                'Alamat',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-            ),
-            SizedBox(height: 8),
+            SizedBox(height: 5),
             TextField(
-              controller: null,
+              controller: _addressController,
               decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  labelText: 'Alamat'),
+                border: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.green), // Opsional: warna garis bawah
+                ),
+              ),
             ),
             SizedBox(
               height: 40,
@@ -130,17 +148,17 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 25,
+              height: 20,
             ),
             Text(
-                  'Logout',
-                  style: TextStyle(
-                      color: Colors.black, // Mengatur warna teks
-                      fontSize: 15,
-                      fontWeight: FontWeight
-                          .w600 // Sesuaikan ukuran teks sesuai kebutuhan
-                      ),
-                ),
+              'Logout',
+              style: TextStyle(
+                  color: Colors.black, // Mengatur warna teks
+                  fontSize: 15,
+                  fontWeight:
+                      FontWeight.bold // Sesuaikan ukuran teks sesuai kebutuhan
+                  ),
+            ),
           ],
         ),
       ),

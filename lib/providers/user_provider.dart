@@ -60,8 +60,38 @@ class UserProvider extends ChangeNotifier {
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body);
         _token = responseData['token'];
+        _users.add(User.fromJson(responseData['data']));
         print(responseData); // optional, for debugging
-        await _secureStorage.write(key: 'token', value: _token!);
+        // await _secureStorage.write(key: 'token', value: _token!);
+      } else {
+        throw Exception('Failed to login');
+      }
+    } catch (e) {
+      print('Error logging in: $e');
+      throw Exception('Failed to login');
+    }
+
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> getProfile(User user) async {
+    _isLoading = true;
+    notifyListeners();
+
+    final url = Uri.parse('http://localhost:4000/api/v1/profile');
+    try {
+      final response = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjEsImlhdCI6MTcxMjgzMzYwMH0.9jykRhG0riCmqcmHFpRaIDaRu7uOD8BTYKN59e3YOJs',
+        },
+      );
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body)['data'];
+        _users.add(User.fromJson(responseData));
+        print(_users); // optional, for debugging
       } else {
         throw Exception('Failed to login');
       }
