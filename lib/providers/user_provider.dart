@@ -12,7 +12,7 @@ class UserProvider extends ChangeNotifier {
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
-
+ 
   Future<void> registerUser(User newUser) async {
     _isLoading = true;
     notifyListeners();
@@ -62,7 +62,11 @@ class UserProvider extends ChangeNotifier {
         _token = responseData['token'];
         _users.add(User.fromJson(responseData['data']));
         print(responseData); // optional, for debugging
-        // await _secureStorage.write(key: 'token', value: _token!);
+        await _secureStorage.write(key: 'token', value: _token!);
+        final storedToken = await _secureStorage.read(key: 'token');
+        if (storedToken != null) {
+          print('Token sudah tersimpan ${storedToken}');
+        }
       } else {
         throw Exception('Failed to login');
       }
@@ -75,7 +79,7 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getProfile(User user) async {
+  Future<void> getProfile() async {
     _isLoading = true;
     notifyListeners();
 
@@ -122,7 +126,7 @@ class UserProvider extends ChangeNotifier {
         final responseData = json.decode(response.body);
         _users.add(User.fromJson(responseData['data']));
         print(responseData); // optional, for debugging
-        
+
         // await _secureStorage.write(key: 'token', value: _token!);
       } else {
         throw Exception('Failed to update');
@@ -140,11 +144,8 @@ class UserProvider extends ChangeNotifier {
   //   _isLoading = true;
   //   notifyListeners();
 
-  
   //       _users.));
   //       // optional, for debugging
-        
-    
 
   //   _isLoading = false;
   //   notifyListeners();

@@ -6,6 +6,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final UserProvider userProvider = Provider.of<UserProvider>(context);
+    userProvider.getProfile();
 
     // Perbarui pengguna setiap kali ada perubahan di UserProvider
     final List<User> users = userProvider.users;
