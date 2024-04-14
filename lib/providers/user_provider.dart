@@ -60,6 +60,7 @@ class UserProvider extends ChangeNotifier {
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body);
         _token = responseData['token'];
+        _users.clear(); 
         _users.add(User.fromJson(responseData['data']));
         print(responseData); // optional, for debugging
         await _secureStorage.write(key: 'token', value: _token!);
@@ -94,8 +95,9 @@ class UserProvider extends ChangeNotifier {
       );
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body)['data'];
+        _users.clear(); 
         _users.add(User.fromJson(responseData));
-        print(_users); // optional, for debugging
+        // print(_users); // optional, for debugging
       } else {
         throw Exception('Failed to login');
       }

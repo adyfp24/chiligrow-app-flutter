@@ -1,30 +1,41 @@
 part of '../page.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  late TextEditingController _addressController;
+  late TextEditingController _emailController;
+  late TextEditingController _phoneNumberController;
+
+  @override
+  void initState() {
+    super.initState();
+    _addressController = TextEditingController();
+    _emailController = TextEditingController();
+    _phoneNumberController = TextEditingController();
+    getUserData();
+  }
+
+  void getUserData() {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    userProvider.getProfile();
+  }
 
   @override
   Widget build(BuildContext context) {
     final UserProvider userProvider = Provider.of<UserProvider>(context);
-    userProvider.getProfile();
-
-    // Perbarui pengguna setiap kali ada perubahan di UserProvider
     final List<User> users = userProvider.users;
     if (users.isEmpty) {
-      // Jika tidak ada pengguna, mungkin Anda ingin menampilkan indikator loading atau pesan lainnya
       return Center(child: CircularProgressIndicator());
     }
     final User loggedInUser = users.first;
-    // final TextEditingController _usernameController = TextEditingController();
-    final TextEditingController _addressController = TextEditingController();
-    final TextEditingController _emailController = TextEditingController();
-    final TextEditingController _phoneNumberController =
-        TextEditingController();
-
-    // final User loggedInUser = userProvider.users.first;
 
     // Mengisi data pengguna ke dalam TextField
-    // _usernameController.text = loggedInUser.username;
     _emailController.text = loggedInUser.email;
     _phoneNumberController.text = loggedInUser.noHP;
     _addressController.text = loggedInUser.alamat;
@@ -32,7 +43,7 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('profile'),
+        title: Text('Profile'),
         backgroundColor: Colors.white,
         elevation: 0,
       ),
@@ -44,9 +55,10 @@ class ProfilePage extends StatelessWidget {
             Text(
               'Profile',
               style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold),
+                color: Colors.black,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             SizedBox(height: 30),
             Container(
@@ -61,9 +73,10 @@ class ProfilePage extends StatelessWidget {
             Text(
               '${loggedInUser.username}',
               style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700),
+                color: Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
             ),
             SizedBox(height: 30),
             Align(
@@ -81,14 +94,11 @@ class ProfilePage extends StatelessWidget {
               controller: _phoneNumberController,
               decoration: InputDecoration(
                 border: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                      color: Colors.green), // Opsional: warna garis bawah
+                  borderSide: BorderSide(color: Colors.green),
                 ),
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
+            SizedBox(height: 20),
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -104,14 +114,11 @@ class ProfilePage extends StatelessWidget {
               controller: _emailController,
               decoration: InputDecoration(
                 border: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                      color: Colors.green), // Opsional: warna garis bawah
+                  borderSide: BorderSide(color: Colors.green),
                 ),
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
+            SizedBox(height: 20),
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -127,87 +134,79 @@ class ProfilePage extends StatelessWidget {
               controller: _addressController,
               decoration: InputDecoration(
                 border: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                      color: Colors.green), // Opsional: warna garis bawah
+                  borderSide: BorderSide(color: Colors.green),
                 ),
               ),
             ),
-            SizedBox(
-              height: 40,
-            ),
+            SizedBox(height: 40),
             Container(
-              width: 150, // Sesuaikan lebar sesuai kebutuhan
-              height: 50, // Sesuaikan tinggi sesuai kebutuhan
+              width: 150,
+              height: 50,
               decoration: BoxDecoration(
-                borderRadius:
-                    BorderRadius.circular(10), // Mengatur ujung menjadi bulat
-                color: Color(0xFF30E5D0), // Mengatur warna latar belakang
+                borderRadius: BorderRadius.circular(10),
+                color: Color(0xFF30E5D0),
               ),
               child: TextButton(
                 onPressed: () {
                   final user = User(
-                    idUser: loggedInUser
-                        .idUser, // Dummy ID, tidak diperlukan untuk login
+                    idUser: loggedInUser.idUser,
                     username: loggedInUser.username,
                     password: loggedInUser.password,
-                    alamat:
-                        _addressController.text, // Tidak diperlukan untuk login
-                    email:
-                        _emailController.text, // Tidak diperlukan untuk login
-                    noHP: _phoneNumberController
-                        .text, // Tidak diperlukan untuk login
-                    role: loggedInUser.role, // Tidak diperlukan untuk login
+                    alamat: _addressController.text,
+                    email: _emailController.text,
+                    noHP: _phoneNumberController.text,
+                    role: loggedInUser.role,
                   );
                   Provider.of<UserProvider>(context, listen: false)
                       .updateProfile(user)
-                      .then((_) async {
-                    // final prefs = FlutterSecureStorage();
-                    // final token = await prefs.read(key: 'token');
-                    // print(token);
-
+                      .then((_) {
+                    getUserData();
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Profile updated successfully')),
                     );
                   }).catchError((error) {
-                    print(error);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                           content:
-                              Text('Failed to update credentials: $error')),
+                              Text('Failed to update profile: $error')),
                     );
                   });
                 },
                 child: Text(
                   'Update Profile',
                   style: TextStyle(
-                      color: Colors.white, // Mengatur warna teks
-                      fontSize: 15,
-                      fontWeight: FontWeight
-                          .w600 // Sesuaikan ukuran teks sesuai kebutuhan
-                      ),
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
+            SizedBox(height: 20),
             InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, '/login');
+              },
               child: Text(
                 'Logout',
                 style: TextStyle(
-                  color: Colors.black, // Mengatur warna teks
+                  color: Colors.black,
                   fontSize: 15,
-                  fontWeight:
-                      FontWeight.bold, // Sesuaikan ukuran teks sesuai kebutuhan
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              onTap: (){
-                Navigator.pushNamed(context, '/login');
-              },
             ),
           ],
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _addressController.dispose();
+    _emailController.dispose();
+    _phoneNumberController.dispose();
+    super.dispose();
   }
 }
