@@ -1,3 +1,4 @@
+import 'package:chiligrow_app/services/service.dart';
 import 'package:chiligrow_app/views/pages/page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => SensorProvider()),
+        ChangeNotifierProvider(create: (_) => SensorProvider(SensorService())),
         ChangeNotifierProvider(create: (_) => UserProvider())
       ],
       child: MaterialApp(
