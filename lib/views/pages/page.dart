@@ -13,3 +13,4 @@ part 'auth/detail_regist.dart';
 part 'auth/login.dart';
 part 'splash_screen.dart';
 part 'profile/profile.dart';
+part 'pemupukan/history_pemupukan.dart';
