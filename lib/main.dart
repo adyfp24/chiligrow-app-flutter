@@ -19,7 +19,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => SensorProvider(SensorService())),
-        ChangeNotifierProvider(create: (_) => UserProvider())
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => PemupukanProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
           '/login' : (context) => LoginPage(),
           '/home' : (context) => HomePage(key: homepageKey),
           '/profile' : (context) => ProfilePage(),
+          '/riwayat-pemupukan' : (context) => HistoryPemupukan(),
         },
       ),
     );

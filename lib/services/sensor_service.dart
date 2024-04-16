@@ -1,6 +1,6 @@
 part of './service.dart';
 
-class SensorService {
+class SensorService { 
   final String baseUrl = 'http://localhost:4000/api/v1';
 
   Future<Sensor> fetchSensorData() async {
