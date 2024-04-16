@@ -6,8 +6,6 @@ class PemupukanProvider extends ChangeNotifier {
   JadwalPupuk get jadwalPupuk => _jadwalPupuk;
   PemupukanProvider(this._pemupukanService);
 
-   
-
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 

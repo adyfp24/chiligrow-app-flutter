@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Chiligrow App',
         theme: ThemeData(),
-        home: LoginPage(),
+        home: SplashScreen(),
         routes: {
           // '/' : (context) => SplashScreen(),
           '/regist': (context) => RegisterPage(),
