@@ -1,4 +1,4 @@
-import 'package:chiligrow_app/models/model.dart';
+part of 'model.dart';
 
 class JadwalPupuk {
   final int idJadwalPupuk;
@@ -11,11 +11,11 @@ class JadwalPupuk {
     this.selangHari,
     this.selangJam,
     this.userId,
-  ); 
+); 
 
   factory JadwalPupuk.fromJson(Map<String, dynamic> json) {
     return JadwalPupuk(
-      json["id_jadwal_pupuk"] as int,
+      json["id_jadwal_pemupukan"] as int,
       json["selang_hari"] as int,
       json["selang_jam"] as String,
       json["user_id"] as int,
@@ -23,7 +23,7 @@ class JadwalPupuk {
   }
 
   Map<String, dynamic> toJson() => {
-        "id_jadwal_pupuk": idJadwalPupuk,
+        "id_jadwal_pemupukan": idJadwalPupuk,
         "selang_hari": selangHari,
         "selang_jam": selangJam,
         "user_id": userId,

@@ -18,9 +18,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => SensorProvider(SensorService())),
-        ChangeNotifierProvider(create: (_) => UserProvider()),
-        ChangeNotifierProvider(create: (_) => PemupukanProvider())
+        ChangeNotifierProvider(
+          create: (_) => SensorProvider(
+            SensorService(),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => UserProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => PemupukanProvider(
+            PemupukanService(),
+          ),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -29,12 +39,12 @@ class MyApp extends StatelessWidget {
         home: LoginPage(),
         routes: {
           // '/' : (context) => SplashScreen(),
-          '/regist' : (context) => RegisterPage(),
-          '/regist-detail' : (context) => DetailRegist(),
-          '/login' : (context) => LoginPage(),
-          '/home' : (context) => HomePage(key: homepageKey),
-          '/profile' : (context) => ProfilePage(),
-          '/riwayat-pemupukan' : (context) => HistoryPemupukan(),
+          '/regist': (context) => RegisterPage(),
+          '/regist-detail': (context) => DetailRegist(),
+          '/login': (context) => LoginPage(),
+          '/home': (context) => HomePage(key: homepageKey),
+          '/profile': (context) => ProfilePage(),
+          '/riwayat-pemupukan': (context) => HistoryPemupukan(),
         },
       ),
     );
