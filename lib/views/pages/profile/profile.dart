@@ -185,7 +185,7 @@ class _ProfilePageState extends State<ProfilePage> {
             SizedBox(height: 20),
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, '/login');
+                userProvider.logoutUser(context);
               },
               child: Text(
                 'Logout',
