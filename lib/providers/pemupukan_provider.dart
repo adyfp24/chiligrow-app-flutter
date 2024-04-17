@@ -2,8 +2,8 @@ part of 'provider.dart';
 
 class PemupukanProvider extends ChangeNotifier {
   late final PemupukanService _pemupukanService;
-  late final JadwalPupuk _jadwalPupuk;
-  JadwalPupuk get jadwalPupuk => _jadwalPupuk;
+  JadwalPupuk? _jadwalPupuk;
+  JadwalPupuk get jadwalPupuk => _jadwalPupuk!;
   PemupukanProvider(this._pemupukanService);
 
   bool _isLoading = false;
@@ -22,7 +22,7 @@ class PemupukanProvider extends ChangeNotifier {
       final storedToken = await _secureStorage.read(key: 'token');
       if (storedToken != null) {
         final data = await _pemupukanService.createPemupukan(storedToken, newJadwal);
-        print('${data}');
+        print('$data');
       }
     } catch (e) {
       print('Error adding jadwal: $e');
@@ -33,7 +33,7 @@ class PemupukanProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getPemupukanData(JadwalPupuk jadwalPupuk) async {
+  Future<void> getPemupukanData() async {
     _isLoading = true;
     notifyListeners();
 
@@ -42,7 +42,8 @@ class PemupukanProvider extends ChangeNotifier {
       if (storedToken != null) {
         final data = await _pemupukanService.getPemupukanData(storedToken);
         _jadwalPupuk = data;
-        print('${data}');
+        print(_jadwalPupuk);
+        notifyListeners();
       }
     } catch (e) {
       print('Error get jadwal: $e');

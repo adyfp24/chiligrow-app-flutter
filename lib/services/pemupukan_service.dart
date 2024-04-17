@@ -43,6 +43,7 @@ class PemupukanService {
         final responseData = json.decode(response.body)['data'];
         final jadwalPupuk =
             JadwalPupuk.fromJson(responseData); // Konversi ke JadwalPupuk
+        print(responseData);
         return jadwalPupuk;
       } else {
         throw Exception('gagal mendapatkan jadwal pemupukan');

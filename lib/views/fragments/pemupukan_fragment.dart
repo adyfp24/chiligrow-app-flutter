@@ -18,6 +18,7 @@ class _PemupukanFragmentState extends State<PemupukanFragment> {
     _dayController = TextEditingController();
     _timeController = TextEditingController();
     _pemupukanProvider = Provider.of<PemupukanProvider>(context, listen: false);
+    _pemupukanProvider.getPemupukanData();
   }
 
   Widget build(BuildContext context) {
@@ -33,7 +34,19 @@ class _PemupukanFragmentState extends State<PemupukanFragment> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('test pemupukan fragment'),
+            Text('get data pemupukan'),  
+            SizedBox(
+              height: 10,
+            ),
+            Text('selang hari : ${_pemupukanProvider.jadwalPupuk.selangHari}'), 
+            SizedBox(
+              height: 10,
+            ),
+            Text('setiap jam : ${_pemupukanProvider.jadwalPupuk.selangJam}'),
+            SizedBox(
+              height: 20,
+            ),
+            Text('tambah jadwal pemupukan'),
             SizedBox(
               height: 20,
             ),
