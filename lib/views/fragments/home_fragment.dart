@@ -5,6 +5,12 @@ class HomeFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final UserProvider userProvider = Provider.of<UserProvider>(context);
+    final List<User> users = userProvider.users;
+    if (users.isEmpty) {
+      return Center(child: CircularProgressIndicator());
+    }
+    final User loggedInUser = users.first;
     return ListView(
       padding: EdgeInsets.symmetric(horizontal: 25),
       shrinkWrap: true,
@@ -75,11 +81,11 @@ class HomeFragment extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Hai, Petani X 👋',
+                  'Hai, ${loggedInUser.username} 👋',
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 17),
                 ),
                 Text(
-                  '🏠 jember',
+                  '🏠 ${loggedInUser.alamat}',
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 17),
                 ),
               ],

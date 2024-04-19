@@ -43,7 +43,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Profile'),
+        title: Text(''),
         backgroundColor: Colors.white,
         elevation: 0,
       ),
@@ -185,7 +185,31 @@ class _ProfilePageState extends State<ProfilePage> {
             SizedBox(height: 20),
             InkWell(
               onTap: () {
-                userProvider.logoutUser(context);
+                // Tampilkan dialog konfirmasi sebelum logout
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text("Konfirmasi"),
+                      content: Text("Apakah Anda yakin ingin keluar?"),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context); // Tutup dialog
+                          },
+                          child: Text("Tidak"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context); // Tutup dialog
+                            userProvider.logoutUser(context); // Lakukan logout
+                          },
+                          child: Text("Ya"),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
               child: Text(
                 'Logout',
