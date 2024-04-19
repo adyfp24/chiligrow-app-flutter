@@ -64,10 +64,10 @@ class _ProfilePageState extends State<ProfilePage> {
             Container(
               width: 100,
               height: 100,
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                shape: BoxShape.circle,
-              ),
+              child: Image(image: AssetImage('img/profil.png'), fit: BoxFit.fill)
+              // decoration: BoxDecoration(
+              //   image: DecorationImage(image: AssetImage('img/profil.png'), fit: BoxFit.fill),
+              // ),
             ),
             SizedBox(height: 10),
             Text(

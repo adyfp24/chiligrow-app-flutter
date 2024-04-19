@@ -63,7 +63,7 @@ class _PenyiramanFragmentState extends State<PenyiramanFragment> {
                     height: 200,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('img/speedo.png'),
+                        image: _getSpeedoImage(sensorProvider.dataSensor.nilaiKelembapan),
                         fit: BoxFit.contain,
                       ),
                     ),
@@ -174,4 +174,21 @@ class _PenyiramanFragmentState extends State<PenyiramanFragment> {
       ),
     );
   }
+
+  AssetImage _getSpeedoImage(int? nilaiKelembapan) {
+  if (nilaiKelembapan != null) {
+    if (nilaiKelembapan >= 0 && nilaiKelembapan <= 25) {
+      return AssetImage('img/speedo1.png');
+    } else if (nilaiKelembapan >= 26 && nilaiKelembapan <= 50) {
+      return AssetImage('img/speedo2.png');
+    } else if (nilaiKelembapan >= 51 && nilaiKelembapan <= 75) {
+      return AssetImage('img/speedo3.png');
+    } else if (nilaiKelembapan >= 76 && nilaiKelembapan <= 100) {
+      return AssetImage('img/speedo4.png');
+    }
+  }
+  // Return default image if nilaiKelembapan tidak berada di dalam rentang yang diinginkan
+  return AssetImage('img/default_image.png');
+}
+
 }

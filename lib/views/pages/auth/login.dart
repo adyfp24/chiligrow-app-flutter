@@ -13,10 +13,6 @@ class LoginPage extends StatelessWidget {
     final TextEditingController _passwordController = TextEditingController();
     return Scaffold(
       backgroundColor: Color(0xFF30E5D0),
-      appBar: AppBar(
-        title: Text(''),
-        toolbarHeight: 20,
-      ),
       body: Column(
         children: [
           SizedBox(height: 180),

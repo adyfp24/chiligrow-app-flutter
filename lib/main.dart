@@ -35,7 +35,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Chiligrow App',
-        theme: ThemeData(),
+        theme: ThemeData(
+          primaryColor: Colors.green, // Atur warna hijau sebagai warna utama// Atur warna latar belakang aplikasi
+          // Anda dapat menyesuaikan properti tema lainnya sesuai kebutuhan
+        ),
         home: SplashScreen(),
         routes: {
           // '/' : (context) => SplashScreen(),
