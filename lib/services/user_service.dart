@@ -39,11 +39,11 @@ class UserService {
         final responseData = json.decode(response.body);
         return responseData;
       } else {
-        throw Exception('Failed to login');
+        throw Exception('username atau password salah').toString();
       }
     } catch (e) {
       print('Error logging in: $e');
-      throw Exception('Failed to login');
+      throw Exception('username atau password salah').toString();
     }
   }
 

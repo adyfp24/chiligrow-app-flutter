@@ -47,7 +47,7 @@ class SplashScreen extends StatelessWidget {
             ),
             SizedBox(height: 15),
             Text(
-              'improve your farm experience',
+              'Solusi modern untuk kebun anda',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.normal,
