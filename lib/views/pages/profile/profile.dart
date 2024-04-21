@@ -60,11 +60,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 20),
             Container(
               width: 100,
               height: 100,
-              child: Image(image: AssetImage('img/profil.png'), fit: BoxFit.fill)
+              child: Image(image: AssetImage('img/profil.png'), fit: BoxFit.cover)
               // decoration: BoxDecoration(
               //   image: DecorationImage(image: AssetImage('img/profil.png'), fit: BoxFit.fill),
               // ),
@@ -197,14 +197,14 @@ class _ProfilePageState extends State<ProfilePage> {
                           onPressed: () {
                             Navigator.pop(context); // Tutup dialog
                           },
-                          child: Text("Tidak"),
+                          child: Text("Tidak", style: TextStyle(color: Color.fromARGB(255, 218, 54, 42))),
                         ),
                         TextButton(
                           onPressed: () {
                             Navigator.pop(context); // Tutup dialog
                             userProvider.logoutUser(context); // Lakukan logout
                           },
-                          child: Text("Ya"),
+                          child: Text("Ya", style: TextStyle(color: Color.fromARGB(255, 63, 151, 66)),),
                         ),
                       ],
                     );
