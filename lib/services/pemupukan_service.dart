@@ -11,7 +11,7 @@ class PemupukanService {
         url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer $token',
+          'Aucvthorization': 'Bearer $token',
         },
         body: jsonEncode(newJadwal),
       );

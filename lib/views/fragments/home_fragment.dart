@@ -5,10 +5,13 @@ class HomeFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context, listen:true);
+    final username = userProvider.users.isNotEmpty ? userProvider.users.first.username : 'petani x';
+    final alamat = userProvider.users.isNotEmpty ? userProvider.users.first.alamat : 'jember';
     return ListView(
       padding: EdgeInsets.symmetric(horizontal: 25),
       shrinkWrap: true,
-      scrollDirection: Axis.vertical, // Tambahkan scrollDirection
+      scrollDirection: Axis.vertical, 
       children: [
         SizedBox(
           height: 20,
@@ -61,11 +64,11 @@ class HomeFragment extends StatelessWidget {
             color: Color.fromRGBO(175, 245, 237, 1),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.4), // Warna bayangan
-                offset: Offset(0, 3), // Bayangan akan muncul 2 pixel ke bawah
+                color: Colors.grey.withOpacity(0.4), 
+                offset: Offset(0, 3), 
                 blurRadius: 1,
                 spreadRadius:
-                    0, // Perpindahan bayangan secara horizontal dan vertikal
+                    0, 
               ),
             ],
           ),
@@ -75,11 +78,11 @@ class HomeFragment extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Hai, Petani X 👋',
+                  'Hai, ${username} 👋',
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 17),
                 ),
                 Text(
-                  '🏠 jember',
+                  '🏠 ${alamat}',
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 17),
                 ),
               ],
