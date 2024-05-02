@@ -18,7 +18,7 @@ class RegisterPage extends StatelessWidget {
       Navigator.pushNamed(context, '/regist-detail');
     }
     return Scaffold(
-      backgroundColor: Color(0xFFE1FCF9),
+      backgroundColor: kColorGreen,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

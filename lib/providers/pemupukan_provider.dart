@@ -3,7 +3,7 @@ part of 'provider.dart';
 class PemupukanProvider extends ChangeNotifier {
   late final PemupukanService _pemupukanService;
   JadwalPupuk? _jadwalPupuk;
-  JadwalPupuk get jadwalPupuk => _jadwalPupuk!;
+  JadwalPupuk? get jadwalPupuk => _jadwalPupuk;
   PemupukanProvider(this._pemupukanService);
 
   bool _isLoading = false;
@@ -43,7 +43,6 @@ class PemupukanProvider extends ChangeNotifier {
         final data = await _pemupukanService.getPemupukanData(storedToken);
         _jadwalPupuk = data;
         print(_jadwalPupuk);
-        notifyListeners();
       }
     } catch (e) {
       print('Error get jadwal: $e');

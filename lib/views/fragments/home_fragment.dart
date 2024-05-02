@@ -6,6 +6,7 @@ class HomeFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context, listen:true);
+    userProvider.getProfile();
     final username = userProvider.users.isNotEmpty ? userProvider.users.first.username : 'petani x';
     final alamat = userProvider.users.isNotEmpty ? userProvider.users.first.alamat : 'jember';
     return ListView(

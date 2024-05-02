@@ -35,7 +35,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Chiligrow App',
         theme: ThemeData(
-          primaryColor: Colors.green,
+          // inputDecorationTheme: InputDecorationTheme(focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: kColorGreen))),
+          colorScheme: ColorScheme.fromSeed(seedColor: kColorGreen)
         ),
         home: SplashScreen(),
         routes: {
