@@ -109,6 +109,17 @@ class DetailRegist extends StatelessWidget {
                     height: 50,
                     child: TextButton(
                       onPressed: () {
+                        if (_usernameController.text.isEmpty ||
+                            _passwordController.text.isEmpty ||
+                            _emailController.text.isEmpty ||
+                            _phoneNumberController.text.isEmpty ||
+                            _addressController.text.isEmpty 
+                            ) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Data harus lengkap')),
+                          );
+                          return;
+                        };
                         final newUser = User(
                           idUser:
                               0, // You may adjust this according to your backend requirements
@@ -131,7 +142,7 @@ class DetailRegist extends StatelessWidget {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                                 content:
-                                    Text('Failed to register user: $error')),
+                                    Text('Failed to register user')),
                           );
                         });
                       },
@@ -145,7 +156,7 @@ class DetailRegist extends StatelessWidget {
                       ),
                       style: TextButton.styleFrom(
                         backgroundColor: Color(0xFF30E5D0),
-                        primary: Colors.white,
+                        // primary: Colors.white,
                         padding:
                             EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                         shape: RoundedRectangleBorder(

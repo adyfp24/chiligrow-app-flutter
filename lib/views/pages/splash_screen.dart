@@ -6,7 +6,7 @@ class SplashScreen extends StatelessWidget {
   Future<void> _toNextPage(BuildContext context) async {
     final UserProvider userProvider =
         Provider.of<UserProvider>(context, listen: false);
-    await Future.delayed(Duration(seconds: 3),);
+    await Future.delayed(Duration(seconds: 5),);
     final secureStorage = FlutterSecureStorage();
     final token = await secureStorage.read(key: 'token');
 
@@ -47,7 +47,7 @@ class SplashScreen extends StatelessWidget {
             ),
             SizedBox(height: 15),
             Text(
-              'improve your farm experience',
+              'Solusi modern untuk kebun anda',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.normal,

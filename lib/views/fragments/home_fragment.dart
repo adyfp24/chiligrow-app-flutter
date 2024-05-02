@@ -34,13 +34,13 @@ class HomeFragment extends StatelessWidget {
                   ),
                   InkWell(
                     child: Container(
-                      width: 40,
-                      height: 40,
+                      width: 50,
+                      height: 50,
                       margin: EdgeInsets.only(top: 0, right: 0),
                       child: ClipOval(
                         child: Image.asset(
                           'img/profil.png',
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                         ),
                       ),
                     ),

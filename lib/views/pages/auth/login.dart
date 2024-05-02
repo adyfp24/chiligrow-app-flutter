@@ -72,6 +72,13 @@ class LoginPage extends StatelessWidget {
                     height: 50,
                     child: TextButton(
                       onPressed: () {
+                        if (_usernameController.text.isEmpty ||
+                            _passwordController.text.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Data harus lengkap')),
+                          );
+                          return;
+                        };
                         final user = User(
                           idUser: 0, // Dummy ID, tidak diperlukan untuk login
                           username: _usernameController.text,
@@ -94,8 +101,7 @@ class LoginPage extends StatelessWidget {
                         }).catchError((error) {
                           print(error);
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                                content: Text('Failed to login user: $error')),
+                           SnackBar(content: Text('username atau password salah'))
                           );
                         });
                       },
@@ -109,7 +115,7 @@ class LoginPage extends StatelessWidget {
                       ),
                       style: TextButton.styleFrom(
                         backgroundColor: Color(0xFF30E5D0),
-                        primary: Colors.white,
+                        // primary: Colors.white,
                         padding:
                             EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                         shape: RoundedRectangleBorder(

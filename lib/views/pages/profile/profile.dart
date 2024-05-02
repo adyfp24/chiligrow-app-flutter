@@ -43,7 +43,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Profile'),
+        title: Text(''),
         backgroundColor: Colors.white,
         elevation: 0,
       ),
@@ -60,14 +60,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 20),
             Container(
               width: 100,
               height: 100,
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                shape: BoxShape.circle,
-              ),
+              child: Image(image: AssetImage('img/profil.png'), fit: BoxFit.cover)
+              // decoration: BoxDecoration(
+              //   image: DecorationImage(image: AssetImage('img/profil.png'), fit: BoxFit.fill),
+              // ),
             ),
             SizedBox(height: 10),
             Text(
@@ -185,7 +185,31 @@ class _ProfilePageState extends State<ProfilePage> {
             SizedBox(height: 20),
             InkWell(
               onTap: () {
-                userProvider.logoutUser(context);
+                // Tampilkan dialog konfirmasi sebelum logout
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text("Konfirmasi"),
+                      content: Text("Apakah Anda yakin ingin keluar?"),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context); // Tutup dialog
+                          },
+                          child: Text("Tidak", style: TextStyle(color: Color.fromARGB(255, 218, 54, 42))),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context); // Tutup dialog
+                            userProvider.logoutUser(context); // Lakukan logout
+                          },
+                          child: Text("Ya", style: TextStyle(color: Color.fromARGB(255, 63, 151, 66)),),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
               child: Text(
                 'Logout',

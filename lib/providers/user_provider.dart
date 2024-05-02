@@ -38,7 +38,7 @@ class UserProvider extends ChangeNotifier {
       await _secureStorage.write(key: 'token', value: _token!);
     } catch (e) {
       print('Error logging in: $e');
-      throw Exception('Failed to login');
+      throw Exception(e.toString());
     }
     _isLoading = false;
     notifyListeners();

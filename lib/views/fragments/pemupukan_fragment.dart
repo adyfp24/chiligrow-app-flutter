@@ -110,7 +110,7 @@ class _PemupukanFragmentState extends State<PemupukanFragment> {
                 ),
                 style: TextButton.styleFrom(
                   backgroundColor: Color(0xFF30E5D0),
-                  primary: Colors.white,
+                  // primary: Colors.white,
                   padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),

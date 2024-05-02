@@ -3,7 +3,6 @@ import 'package:chiligrow_app/views/pages/page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:chiligrow_app/providers/provider.dart';
-import 'package:chiligrow_app/views/fragments/fragment.dart';
 import './utils/utils.dart';
 
 void main() {
@@ -35,7 +34,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Chiligrow App',
-        theme: ThemeData(),
+        theme: ThemeData(
+          primaryColor: Colors.green,
+        ),
         home: SplashScreen(),
         routes: {
           // '/' : (context) => SplashScreen(),
