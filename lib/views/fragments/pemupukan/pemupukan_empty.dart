@@ -19,7 +19,14 @@ class PemupukanEmptyFragment extends StatelessWidget {
         Text('Belum ada jadwal pemupukan'),
         SizedBox(height: 60),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return ModalPemupukanFragment();
+              },
+            );
+          },
           child: Text(
             '+ Tambah',
             style: TextStyle(
