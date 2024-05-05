@@ -18,7 +18,7 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
     try {
       final responseData = await _userService.registerUser(newUser);
-      _users.add(User.fromJson(responseData));
+      _users.add(User.fromJson(responseData['data']));
     } catch (e) {
       print('Error registering user: $e');
       throw Exception('Failed to register user');
@@ -58,7 +58,7 @@ class UserProvider extends ChangeNotifier {
       if (storedToken != null) {
         final responseData = await _userService.getProfile(storedToken);
         _users.clear(); 
-        _users.add(User.fromJson(responseData));
+        _users.add(User.fromJson(responseData['data']));
       }
     } catch (e) {
       print('Error getting profile: $e');

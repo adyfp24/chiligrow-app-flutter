@@ -1,94 +1,58 @@
 part of './service.dart';
 
 class UserService {
-  final String baseUrl = 'http://localhost:4000/api/v1';
-
   Future<dynamic> registerUser(User newUser) async {
-    final url = Uri.parse('$baseUrl/register');
+    final url = Uri.parse('${ApiHelper.baseUrl}/register');
     try {
       final response = await http.post(
         url,
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
+        headers: ApiHelper.getHeaders(''),
         body: jsonEncode(newUser),
       );
-      if (response.statusCode == 201) {
-        final responseData = json.decode(response.body)['data'];
-        return responseData;
-      } else {
-        throw Exception('Failed to register user');
-      }
+      return ApiHelper.handleResponse(response);
     } catch (e) {
-      print('Error registering user: $e');
-      throw Exception('Failed to register user');
+      return ApiHelper.handleError(e);
     }
   }
 
   Future<dynamic> loginUser(User user) async {
-    final url = Uri.parse('$baseUrl/login');
+    final url = Uri.parse('${ApiHelper.baseUrl}/login');
     try {
       final response = await http.post(
         url,
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
+        headers: ApiHelper.getHeaders(''),
         body: jsonEncode(user),
       );
-      if (response.statusCode == 200) {
-        final responseData = json.decode(response.body);
-        return responseData;
-      } else {
-        throw Exception('username atau password salah').toString();
-      }
+      return ApiHelper.handleResponse(response);
     } catch (e) {
-      print('Error logging in: $e');
-      throw Exception('username atau password salah').toString();
+      return ApiHelper.handleError(e);
     }
   }
 
   Future<dynamic> getProfile(String token) async {
-    final url = Uri.parse('$baseUrl/profile');
+    final url = Uri.parse('${ApiHelper.baseUrl}/profile');
     try {
       final response = await http.get(
         url,
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer $token',
-        },
+        headers: ApiHelper.getHeaders(token),
       );
-      if (response.statusCode == 200) {
-        final responseData = json.decode(response.body)['data'];
-        return responseData;
-      } else {
-        throw Exception('Failed to get profile');
-      }
+      return ApiHelper.handleResponse(response);
     } catch (e) {
-      print('Error getting profile: $e');
-      throw Exception('Failed to get profile');
+      return ApiHelper.handleError(e);
     }
   }
 
   Future<void> updateProfile(String token, User user) async {
-    final url = Uri.parse('$baseUrl/profile');
+    final url = Uri.parse('${ApiHelper.baseUrl}/profile');
     try {
       final response = await http.put(
         url,
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer $token',
-        },
+        headers: ApiHelper.getHeaders(token),
         body: jsonEncode(user),
       );
-      if (response.statusCode == 200) {
-        final responseData = json.decode(response.body)['data'];
-        return responseData;
-      } else {
-        throw Exception('Failed to update profile');
-      }
+      return ApiHelper.handleResponse(response);
     } catch (e) {
-      print('Error updating profile: $e');
-      throw Exception('Failed to update profile');
+      return ApiHelper.handleError(e);
     }
   }
 }

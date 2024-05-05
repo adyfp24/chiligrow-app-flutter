@@ -5,3 +5,4 @@ import 'package:chiligrow_app/models/model.dart';
 part 'user_service.dart';
 part 'sensor_service.dart';
 part 'pemupukan_service.dart';
+part 'api_helper.dart';
