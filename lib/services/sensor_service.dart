@@ -1,10 +1,9 @@
 part of './service.dart';
 
 class SensorService { 
-  final String baseUrl = 'http://localhost:4000/api/v1';
 
   Future<Sensor> fetchSensorData() async {
-    final url = Uri.parse('$baseUrl/sensor-data');
+    final url = Uri.parse('${ApiHelper.baseUrl}/sensor-data');
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {

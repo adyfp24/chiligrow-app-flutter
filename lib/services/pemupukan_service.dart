@@ -5,7 +5,7 @@ class PemupukanService {
 
   Future<JadwalPupuk> createPemupukan(
       String token, JadwalPupuk newJadwal) async {
-    final url = Uri.parse('$baseUrl/jadwal-pemupukan');
+    final url = Uri.parse('${ApiHelper.baseUrl}/jadwal-pemupukan');
     try {
       final response = await http.post(
         url,
@@ -30,7 +30,7 @@ class PemupukanService {
   }
 
   Future<JadwalPupuk> getPemupukanData (String token) async {
-    final url = Uri.parse('$baseUrl/jadwal-pemupukan');
+    final url = Uri.parse('${ApiHelper.baseUrl}/jadwal-pemupukan');
     try {
       final response = await http.get(
         url,

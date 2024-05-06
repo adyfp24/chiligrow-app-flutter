@@ -5,8 +5,23 @@ class HomeFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: Provider.of<UserProvider>(context, listen: false).getProfile(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator()); 
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}')); 
+        } else {       
+          return _buildHomeWidget(context);
+        }
+      },
+    );
+  }
+
+  @override
+  Widget _buildHomeWidget(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context, listen:true);
-    userProvider.getProfile();
     final username = userProvider.users.isNotEmpty ? userProvider.users.first.username : 'petani x';
     final alamat = userProvider.users.isNotEmpty ? userProvider.users.first.alamat : 'jember';
     return ListView(
