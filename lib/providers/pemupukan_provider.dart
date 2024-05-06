@@ -22,7 +22,8 @@ class PemupukanProvider extends ChangeNotifier {
       final storedToken = await _secureStorage.read(key: 'token');
       if (storedToken != null) {
         final data = await _pemupukanService.createPemupukan(storedToken, newJadwal);
-        print('$data');
+        _jadwalPupuk = data;
+        print(_jadwalPupuk);
       }
     } catch (e) {
       print('Error adding jadwal: $e');
