@@ -21,7 +21,8 @@ class PemupukanProvider extends ChangeNotifier {
     try {
       final storedToken = await _secureStorage.read(key: 'token');
       if (storedToken != null) {
-        final data = await _pemupukanService.createPemupukan(storedToken, newJadwal);
+        final data =
+            await _pemupukanService.createPemupukan(storedToken, newJadwal);
         _jadwalPupuk = data;
         print(_jadwalPupuk);
       }
@@ -51,6 +52,27 @@ class PemupukanProvider extends ChangeNotifier {
     }
 
     _isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> updateJadwal(JadwalPupuk updatedJadwal) async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      final storedToken = await _secureStorage.read(key: 'token');
+      if (storedToken != null) {
+        final data = await _pemupukanService.updatePemupukanData(
+            storedToken, updatedJadwal);
+        _jadwalPupuk = data;
+        print(_jadwalPupuk);
+      }
+    } catch (e) {
+      print('Error updating jadwal: $e');
+      throw Exception('internal server eror');
+    }
+
+    _isLoading = true;
     notifyListeners();
   }
 }

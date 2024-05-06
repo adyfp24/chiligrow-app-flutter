@@ -29,6 +29,15 @@ class PemupukanService {
     }
   }
 
+  Future<JadwalPupuk> updatePemupukanData(String token, JadwalPupuk updatedJadwal) async {
+    try{
+      var jadwalPupuk;
+      return jadwalPupuk;
+    }catch(e){
+      throw Exception('internal server eror');
+    }
+  }
+
   Future<JadwalPupuk> getPemupukanData (String token) async {
     final url = Uri.parse('${ApiHelper.baseUrl}/jadwal-pemupukan');
     try {
