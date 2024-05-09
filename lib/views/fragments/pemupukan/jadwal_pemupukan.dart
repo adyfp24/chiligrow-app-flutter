@@ -10,11 +10,8 @@ class JadwalPempukan extends StatefulWidget {
 class _JadwalPempukanState extends State<JadwalPempukan> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-
-      ],
+    return Center(
+      child: Text('jadwal'),
     );
   }
 }

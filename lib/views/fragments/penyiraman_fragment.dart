@@ -30,7 +30,7 @@ class _PenyiramanFragmentState extends State<PenyiramanFragment> {
       appBar: AppBar(
         title: Text(
           'Penyiraman Otomatis',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize:18)
         ),
         backgroundColor: Color.fromRGBO(175, 245, 237, 1),
         shape: ContinuousRectangleBorder(

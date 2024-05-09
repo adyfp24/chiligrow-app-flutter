@@ -10,6 +10,8 @@ class HistoryPempukan extends StatefulWidget {
 class _HistoryPempukanState extends State<HistoryPempukan> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Center(
+      child: Text('history'),
+    );
   }
 }

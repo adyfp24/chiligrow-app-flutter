@@ -40,7 +40,7 @@ class _PemupukanFragmentState extends State<PemupukanFragment>
       appBar: AppBar(
         title: Text(
           'Pemupukan Otomatis',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize:18 ),
         ),
         backgroundColor: Color.fromRGBO(175, 245, 237, 1),
         shape: ContinuousRectangleBorder(
@@ -58,7 +58,6 @@ class _PemupukanFragmentState extends State<PemupukanFragment>
           tabs: [
             Text(
               'Data Jadwal',
-              style: TextStyle(color: Colors.amber),
             ),
             Text('History'),
           ],
