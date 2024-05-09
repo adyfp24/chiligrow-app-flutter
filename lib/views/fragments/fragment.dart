@@ -1,4 +1,7 @@
+import 'dart:html';
+
 import 'package:chiligrow_app/utils/utils.dart';
+import 'package:chiligrow_app/views/widgets/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,5 +15,7 @@ part 'simulasi_fragment.dart';
 part 'pemupukan_fragment.dart';
 part 'pemupukan/pemupukan_empty.dart';
 part 'pemupukan/modal_fragment.dart';
+part 'pemupukan/history_pemupukan.dart';
+part 'pemupukan/jadwal_pemupukan.dart';
 
 

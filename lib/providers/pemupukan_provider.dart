@@ -71,7 +71,7 @@ class PemupukanProvider extends ChangeNotifier {
       print('Error updating jadwal: $e');
       throw Exception('internal server eror');
     }
-
+    
     _isLoading = true;
     notifyListeners();
   }

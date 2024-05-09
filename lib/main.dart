@@ -3,6 +3,7 @@ import 'package:chiligrow_app/views/pages/page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:chiligrow_app/providers/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import './utils/utils.dart';
 
 void main() {
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Chiligrow App',
         theme: ThemeData(
-          // inputDecorationTheme: InputDecorationTheme(focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: kColorGreen))),
+          fontFamily: GoogleFonts.poppins().fontFamily,
           colorScheme: ColorScheme.fromSeed(seedColor: kColorGreen)
         ),
         home: SplashScreen(),
