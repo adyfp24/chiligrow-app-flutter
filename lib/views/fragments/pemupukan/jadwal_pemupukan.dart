@@ -1,17 +1,36 @@
 part of '../fragment.dart';
 
-class JadwalPempukan extends StatefulWidget {
-  const JadwalPempukan({ Key? key }) : super(key: key);
+class JadwalPemupukan extends StatelessWidget {
+  final int selangHari;
+  final String selangJam;
+  const JadwalPemupukan({
+    Key? key,
+    required this.selangHari,
+    required this.selangJam,
+  }) : super(key: key);
 
-  @override
-  State<JadwalPempukan> createState() => _JadwalPempukanState();
-}
-
-class _JadwalPempukanState extends State<JadwalPempukan> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('jadwal'),
+      child: Column(
+        children: [
+          SizedBox(height: 40),
+          HistoryButton(),
+          SizedBox(height: 40),
+          Text('get data pemupukan'),
+          SizedBox(
+            height: 10,
+          ),
+          Text('selang hari : ${selangHari}'),
+          SizedBox(
+            height: 10,
+          ),
+          Text('setiap jam : ${selangJam}'),
+          SizedBox(
+            height: 20,
+          ),
+        ],
+      ),
     );
   }
 }

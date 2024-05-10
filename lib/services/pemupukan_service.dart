@@ -1,7 +1,6 @@
 part of 'service.dart';
 
 class PemupukanService {
-  final String baseUrl = 'http://localhost:4000/api/v1';
 
   Future<JadwalPupuk> createPemupukan(
       String token, JadwalPupuk newJadwal) async {

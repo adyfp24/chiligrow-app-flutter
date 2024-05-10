@@ -9,11 +9,11 @@ class SimulasiProvider extends ChangeNotifier{
   Simulasi? _simulasiPenanaman;
   Simulasi? get simulasiPenanaman => _simulasiPenanaman;
 
-  Future<void> createSimulasi() async {
+  Future<void> createSimulasi(Simulasi newSimulasi) async {
     _isLoading = true;
     notifyListeners();
     try {
-      final responseData = await _simulasiService.createSimulasi();
+      final responseData = await _simulasiService.createSimulasi(newSimulasi);
       _simulasiPenanaman = responseData;
     } catch (e) {
       print('Error fetching simulasi data: $e');
