@@ -13,11 +13,10 @@ class JadwalPemupukan extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(height: 40),
           HistoryButton(),
-          SizedBox(height: 40),
-          Text('get data pemupukan'),
           SizedBox(
             height: 10,
           ),
