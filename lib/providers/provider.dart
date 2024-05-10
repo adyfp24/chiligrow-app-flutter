@@ -9,7 +9,7 @@ import 'package:chiligrow_app/services/service.dart';
 part './sensor_provider.dart';
 part './user_provider.dart';
 part './pemupukan_provider.dart';
-
+part './simulasi_provider.dart';
 
 
 

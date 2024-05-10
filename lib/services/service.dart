@@ -6,3 +6,4 @@ part 'user_service.dart';
 part 'sensor_service.dart';
 part 'pemupukan_service.dart';
 part 'api_helper.dart';
+part 'simulasi_service.dart';
