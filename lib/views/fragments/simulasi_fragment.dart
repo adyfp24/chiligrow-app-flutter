@@ -106,13 +106,8 @@ class _SimulasiFragmentState extends State<SimulasiFragment> {
             ),
             SizedBox(height: 25),
             TextButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return ModalPemupukanFragment();
-                  },
-                );
+              onPressed: () => {
+                Navigator.pushNamed(context, '/hasil-simulasi')
               },
               child: Row(
                 mainAxisSize: MainAxisSize.min,

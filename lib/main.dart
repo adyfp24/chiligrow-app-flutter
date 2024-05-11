@@ -48,6 +48,7 @@ class MyApp extends StatelessWidget {
           '/home': (context) => HomePage(key: homepageKey),
           '/profile': (context) => ProfilePage(),
           '/riwayat-pemupukan': (context) => HistoryPemupukan(),
+          '/hasil-simulasi': (context) => HasilSimulasi(),
         },
       ),
     );

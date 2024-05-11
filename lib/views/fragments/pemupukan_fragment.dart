@@ -99,7 +99,7 @@ class _PemupukanFragmentState extends State<PemupukanFragment>
               selangHari: _pemupukanProvider.jadwalPupuk!.selangHari,
               selangJam: _pemupukanProvider.jadwalPupuk!.selangJam,
             ),
-            HistoryPemupukan(),
+            HistoryPemupukanFragment(),
           ],
           controller: _tabBarController,
         ),

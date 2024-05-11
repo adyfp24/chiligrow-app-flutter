@@ -15,3 +15,4 @@ part 'auth/login.dart';
 part 'splash_screen.dart';
 part 'profile/profile.dart';
 part 'pemupukan/history_pemupukan.dart';
+part 'simulasi/hasil_simulasi.dart';

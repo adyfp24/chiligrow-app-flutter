@@ -1,13 +1,13 @@
 part of '../fragment.dart';
 
-class HistoryPemupukan extends StatefulWidget {
-  const HistoryPemupukan({ Key? key }) : super(key: key);
+class HistoryPemupukanFragment extends StatefulWidget {
+  const HistoryPemupukanFragment({ Key? key }) : super(key: key);
 
   @override
-  State<HistoryPemupukan> createState() => _HistoryPemupukanState();
+  State<HistoryPemupukanFragment> createState() => _HistoryPemupukanState();
 }
 
-class _HistoryPemupukanState extends State<HistoryPemupukan> {
+class _HistoryPemupukanState extends State<HistoryPemupukanFragment> {
   @override
   Widget build(BuildContext context) {
     return Center(
