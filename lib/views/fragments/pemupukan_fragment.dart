@@ -67,6 +67,11 @@ class _PemupukanFragmentState extends State<PemupukanFragment>
         elevation: 0,
         bottom: _pemupukanProvider.jadwalPupuk != null
             ? TabBar(
+                labelColor: Color.fromRGBO(0, 133, 117, 1),
+                unselectedLabelColor: Colors.white,
+                indicatorColor: Color.fromRGBO(0, 133, 117, 1),
+                labelPadding: EdgeInsets.only(bottom: 10),
+                indicatorSize: TabBarIndicatorSize.label,
                 tabs: [
                   Text('Data Jadwal'),
                   Text('History'),
