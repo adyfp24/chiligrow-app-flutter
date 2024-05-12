@@ -10,7 +10,6 @@ class SimulasiFragment extends StatefulWidget {
 class _SimulasiFragmentState extends State<SimulasiFragment> {
   String? _selectedBibit;
   TextEditingController _lahanController = TextEditingController();
-  TextEditingController _bibitController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +60,7 @@ class _SimulasiFragmentState extends State<SimulasiFragment> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                     child: Column(
                       children: [
                         TextField(
@@ -78,8 +76,7 @@ class _SimulasiFragmentState extends State<SimulasiFragment> {
                           value: _selectedBibit,
                           onChanged: (String? newValue) {
                             setState(() {
-                              _selectedBibit =
-                                  newValue; // Menyimpan nilai pilihan bibit
+                              _selectedBibit = newValue;
                             });
                           },
                           decoration: InputDecoration(
@@ -88,10 +85,8 @@ class _SimulasiFragmentState extends State<SimulasiFragment> {
                             ),
                             labelText: 'Jenis bibit',
                           ),
-                          items: <String>[
-                            'Bibit Cabai Merah',
-                            'Bibit Cabai Rawit'
-                          ].map<DropdownMenuItem<String>>((String value) {
+                          items: <String>['merah', 'rawit']
+                              .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(value),
@@ -106,8 +101,46 @@ class _SimulasiFragmentState extends State<SimulasiFragment> {
             ),
             SizedBox(height: 25),
             TextButton(
-              onPressed: () => {
-                Navigator.pushNamed(context, '/hasil-simulasi')
+              onPressed: () {
+                final newSimulasi = Simulasi(_selectedBibit!,
+                    int.parse(_lahanController.text), 0, 0, 0, 0, 0);
+                final _simulasiProvider = Provider.of<SimulasiProvider>(
+                  context,
+                  listen: false,
+                );
+                _simulasiProvider.createSimulasi(newSimulasi).then((_) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('simulation created successfully'),
+                    ),
+                  );
+                  if (_simulasiProvider.simulasiPenanaman != null) {
+                    final simulasiData = {
+                      'luasLahan': _simulasiProvider
+                          .simulasiPenanaman!.luasLahan
+                          .toString(),
+                      'jumlahBibit': _simulasiProvider
+                          .simulasiPenanaman!.jumlahBibit
+                          .toString(),
+                      'pupukUrea': _simulasiProvider
+                          .simulasiPenanaman!.pupukUrea
+                          .toString(),
+                      'pupukNpk': _simulasiProvider.simulasiPenanaman!.pupukNpk
+                          .toString(),
+                      'volumeAir':
+                          _simulasiProvider.simulasiPenanaman!.volumeAir
+                          .toString(),
+                    };
+                    Navigator.pushNamed(context, '/hasil-simulasi',
+                        arguments: simulasiData);
+                  }
+                }).catchError((error) {
+                  print(error);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                        content: Text('Failed to create schedule: $error')),
+                  );
+                });
               },
               child: Row(
                 mainAxisSize: MainAxisSize.min,

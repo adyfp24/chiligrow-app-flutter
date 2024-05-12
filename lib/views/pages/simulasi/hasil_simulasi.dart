@@ -1,10 +1,19 @@
 part of '../page.dart';
 
 class HasilSimulasi extends StatelessWidget {
-  const HasilSimulasi({Key? key}) : super(key: key);
+  const HasilSimulasi({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, String> data =
+        ModalRoute.of(context)?.settings.arguments as Map<String, String>;
+    final luasLahan = data['luasLahan']!;
+    final jumlahBibit = data['jumlahBibit']!;
+    final pupukUrea = data['pupukUrea']!;
+    final pupukNpk = data['pupukNpk']!;
+    final volumeAir = data['volumeAir']!;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -21,7 +30,9 @@ class HasilSimulasi extends StatelessWidget {
         ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => {homepageKey.currentState!.setSelectedIndex(0)},
+          onPressed: () {
+            homepageKey.currentState!.setSelectedIndex(0);
+          },
         ),
         elevation: 0,
       ),
@@ -31,12 +42,11 @@ class HasilSimulasi extends StatelessWidget {
           children: [
             Container(
               width: 300,
-              height: 360,
+              height: 450,
               decoration: BoxDecoration(
                   border: Border.all(style: BorderStyle.solid),
                   borderRadius: BorderRadius.circular(15)),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(height: 30),
                   Container(
@@ -53,116 +63,76 @@ class HasilSimulasi extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 35),
-                  Container(
-                    width: 250,
-                    height: 200,
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.calendar_today),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              'Jarak tanam',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.av_timer_outlined),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              'Jumlah Bibit',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.av_timer_outlined),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              'Kuantitas Pupuk',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.av_timer_outlined),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              'Volume Air',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  _buildDetailItem(
+                      Icons.task, 'Jarak tanam', '20 cm x 20cm (${luasLahan})'),
+                  _buildDetailItem(
+                      Icons.task, 'Jumlah Bibit', '${jumlahBibit}'),
+                  _buildDetailItem(Icons.task, 'Kuantitas Pupuk',
+                      'Pupuk Npk ${pupukNpk} kg\nPupuk Urea ${pupukUrea} kg'),
+                  _buildDetailItem(Icons.task, 'Volume Air', '${volumeAir}'),
+                  SizedBox(height: 15),
                 ],
               ),
             ),
-            SizedBox(height: 35,),
+            SizedBox(height: 35),
             Container(
-              width: 290, // Sesuaikan lebar sesuai kebutuhan
-              height: 60, // Sesuaikan tinggi sesuai kebutuhan
+              width: 290,
+              height: 60,
               decoration: BoxDecoration(
-                borderRadius:
-                    BorderRadius.circular(15), // Mengatur ujung menjadi bulat
-                color: Color(0xFF30E5D0), // Mengatur warna latar belakang
+                borderRadius: BorderRadius.circular(15),
+                color: Color(0xFF30E5D0),
               ),
               child: TextButton(
-                onPressed: ()=> {
-                  Navigator.pushNamed(context, '/home')
-                },
+                onPressed: () => Navigator.pushNamed(context, '/home'),
                 child: Text(
                   'Kembali Ke Beranda',
                   style: TextStyle(
-                      color: Colors.white, // Mengatur warna teks
+                      color: Colors.white,
                       fontSize: 16,
-                      fontWeight: FontWeight
-                          .w600 // Sesuaikan ukuran teks sesuai kebutuhan
-                      ),
+                      fontWeight: FontWeight.w600),
                 ),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildDetailItem(IconData icon, String title, String value) {
+    return Padding(
+      padding: EdgeInsets.only(left: 15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Icon(icon),
+              SizedBox(width: 20),
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 7.5,
+          ),
+          Text(
+            value,
+            style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF30E5D0)),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+        ],
       ),
     );
   }

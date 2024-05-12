@@ -30,15 +30,17 @@ class MyApp extends StatelessWidget {
           create: (_) => PemupukanProvider(
             PemupukanService(),
           ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => SimulasiProvider(),
         )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Chiligrow App',
         theme: ThemeData(
-          fontFamily: GoogleFonts.poppins().fontFamily,
-          colorScheme: ColorScheme.fromSeed(seedColor: kColorGreen)
-        ),
+            fontFamily: GoogleFonts.poppins().fontFamily,
+            colorScheme: ColorScheme.fromSeed(seedColor: kColorGreen)),
         home: SplashScreen(),
         routes: {
           // '/' : (context) => SplashScreen(),
