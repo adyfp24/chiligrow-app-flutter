@@ -7,10 +7,11 @@ class Simulasi {
   final int kuantitasPupuk;
   final int volumeAir;
   final int jumlahBibit;
-  final String jenisPupuk;
+  final int pupukUrea;
+  final int pupukNpk;
 
   Simulasi(this.idSimulasi, this.jenisBibit, this.luasLahan,
-      this.kuantitasPupuk, this.jenisPupuk, this.jumlahBibit, this.volumeAir);
+      this.kuantitasPupuk, this.jumlahBibit, this.volumeAir, this.pupukUrea, this.pupukNpk);
 
   factory Simulasi.fromJson(Map<String, dynamic> json) {
     return Simulasi(
@@ -18,9 +19,10 @@ class Simulasi {
         json['jenis_bibit'] as String,
         json['luas_lahan'] as int,
         json['kuantitas_pupuk'] as int,
-        json['jenis_pupuk'] as String,
         json['jumlah_bibit'] as int,
-        json['debit_air'] as int
+        json['volume_air'] as int,
+        json['pupuk_urea'] as int,
+        json['pupuk_npk'] as int
     );
   }
 
@@ -30,9 +32,10 @@ class Simulasi {
       'jenis_bibit': jenisBibit,
       'luas_lahan': luasLahan,
       'kuantitas_pupuk': kuantitasPupuk,
-      'jenis_pupuk': jenisPupuk,
       'jumlah_bibit': jumlahBibit,
-      'debit_air': volumeAir,
+      'volume_air': volumeAir,
+      'pupuk_urea': pupukUrea,
+      'pupuk_npk': pupukNpk,
     };
   }
 }
