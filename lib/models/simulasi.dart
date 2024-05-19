@@ -22,12 +22,12 @@ class Simulasi {
   factory Simulasi.fromJson(Map<String, dynamic> json) {
     return Simulasi(
         json['jenis_bibit'] as String,
-        (json['luas_lahan'] as double).toInt(),
-        (json['kuantitas_pupuk'] as double).toInt(),
-        (json['jumlah_bibit'] as double).toInt(),
-        (json['volume_air'] as double).toInt(),
-        (json['pupuk_urea'] as double).toInt(),
-        (json['pupuk_npk'] as double).toInt());
+        (json['luas_lahan'] as num).toInt(),
+        (json['kuantitas_pupuk'] as num).toInt(),
+        (json['jumlah_bibit'] as num).toInt(),
+        (json['volume_air'] as num).toInt(),
+        (json['pupuk_urea'] as num).toInt(),
+        (json['pupuk_npk'] as num).toInt());
   }
 
   Map<String, dynamic> toJson() {
