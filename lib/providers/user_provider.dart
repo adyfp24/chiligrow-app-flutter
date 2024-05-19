@@ -52,7 +52,9 @@ class UserProvider extends ChangeNotifier {
 
   Future<void> getProfile() async {
     _isLoading = true;
-    notifyListeners();
+     WidgetsBinding.instance?.addPostFrameCallback((_) {
+      notifyListeners(); 
+    });
     try {
       final storedToken = await _secureStorage.read(key: 'token');
       if (storedToken != null) {

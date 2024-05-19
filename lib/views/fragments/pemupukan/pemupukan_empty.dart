@@ -14,7 +14,7 @@ class PemupukanEmptyFragment extends StatelessWidget {
             height: 100,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage('img/eco.png'), fit: BoxFit.cover)),
+                    image: AssetImage('assets/img/eco.png'), fit: BoxFit.cover)),
           ),
           SizedBox(height: 10),
           Text('Belum ada jadwal pemupukan'),

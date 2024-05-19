@@ -178,17 +178,17 @@ class _PenyiramanFragmentState extends State<PenyiramanFragment> {
   AssetImage _getSpeedoImage(int? nilaiKelembapan) {
   if (nilaiKelembapan != null) {
     if (nilaiKelembapan >= 0 && nilaiKelembapan <= 250) {
-      return AssetImage('img/speedo1.png');
+      return AssetImage('assets/img/speedo1.png');
     } else if (nilaiKelembapan >= 251 && nilaiKelembapan <= 500) {
-      return AssetImage('img/speedo2.png');
+      return AssetImage('assets/img/speedo2.png');
     } else if (nilaiKelembapan >= 501 && nilaiKelembapan <= 750) {
-      return AssetImage('img/speedo3.png');
+      return AssetImage('assets/img/speedo3.png');
     } else if (nilaiKelembapan >= 751 && nilaiKelembapan <= 1025) {
-      return AssetImage('img/speedo4.png');
+      return AssetImage('assets/img/speedo4.png');
     }
   }
   // Return default image if nilaiKelembapan tidak berada di dalam rentang yang diinginkan
-  return AssetImage('img/default_image.png');
+  return AssetImage('assets/img/default_image.png');
 }
 
 }
