@@ -66,7 +66,17 @@ class LoginPage extends StatelessWidget {
                         prefixIcon: Icon(Icons.lock),
                         labelText: 'Password'),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 15),
+                  InkWell(
+                    onTap: () => Navigator.pushNamed(context, '/forget'),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Text('Lupa Password?',
+                          textAlign: TextAlign.end,
+                          style: TextStyle(fontWeight: FontWeight.w500)),
+                    ),
+                  ),
+                  SizedBox(height: 15),
                   Container(
                     width: double.infinity,
                     height: 50,
@@ -78,7 +88,8 @@ class LoginPage extends StatelessWidget {
                             SnackBar(content: Text('Data harus lengkap')),
                           );
                           return;
-                        };
+                        }
+                        ;
                         final user = User(
                           idUser: 0, // Dummy ID, tidak diperlukan untuk login
                           username: _usernameController.text,
@@ -100,9 +111,8 @@ class LoginPage extends StatelessWidget {
                           Navigator.pushNamed(context, '/home');
                         }).catchError((error) {
                           print(error);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                           SnackBar(content: Text('username atau password salah'))
-                          );
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('username atau password salah')));
                         });
                       },
                       child: Text(

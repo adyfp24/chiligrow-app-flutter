@@ -13,7 +13,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -51,6 +50,9 @@ class MyApp extends StatelessWidget {
           '/profile': (context) => ProfilePage(),
           '/riwayat-pemupukan': (context) => HistoryPemupukan(),
           '/hasil-simulasi': (context) => HasilSimulasi(),
+          '/forget': (context) => ForgetPage(),
+          '/verify-otp':(context) => VerifyOtpPage(),
+          '/reset-password': (context) => ResetPasswordPage()
         },
       ),
     );

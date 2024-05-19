@@ -70,7 +70,7 @@ class HomeFragment extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 25,
+          height: 15,
         ),
         Container(
           width: 300,
