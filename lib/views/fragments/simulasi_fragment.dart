@@ -151,7 +151,7 @@ class _SimulasiFragmentState extends State<SimulasiFragment> {
                     'Lihat',
                     style: TextStyle(
                       fontSize: 18,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                   ),

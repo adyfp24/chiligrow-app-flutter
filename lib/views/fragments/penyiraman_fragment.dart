@@ -93,7 +93,7 @@ class _PenyiramanFragmentState extends State<PenyiramanFragment> {
                     ),
                     child: Center(
                       child: Text(
-                        '${sensorProvider.dataSensor.nilaiKelembapan != null && sensorProvider.dataSensor.nilaiKelembapan > 700 ? 'KONDISI TANAH KERING' : 'KONDISI TANAH BASAH'}',
+                        '${sensorProvider.dataSensor.nilaiKelembapan != null && sensorProvider.dataSensor.nilaiKelembapan > 400 ? 'KONDISI TANAH KERING' : 'KONDISI TANAH BASAH'}',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
@@ -125,7 +125,7 @@ class _PenyiramanFragmentState extends State<PenyiramanFragment> {
                           ),
                           SizedBox(height: 10),
                           Text(
-                            '${sensorProvider.dataSensor.nilaiKelembapan != null && sensorProvider.dataSensor.nilaiKelembapan > 700 ? 'ON' : 'OFF'}',
+                            '${sensorProvider.dataSensor.nilaiKelembapan != null && sensorProvider.dataSensor.nilaiKelembapan > 400 ? 'ON' : 'OFF'}',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
@@ -155,7 +155,7 @@ class _PenyiramanFragmentState extends State<PenyiramanFragment> {
                           ),
                           SizedBox(height: 10),
                           Text(
-                            '${sensorProvider.dataSensor.nilaiKelembapan != null && sensorProvider.dataSensor.nilaiKelembapan > 700 ? 'HIDUP' : 'MATI'}',
+                            '${sensorProvider.dataSensor.nilaiKelembapan != null && sensorProvider.dataSensor.nilaiKelembapan > 400 ? 'HIDUP' : 'MATI'}',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
@@ -177,13 +177,13 @@ class _PenyiramanFragmentState extends State<PenyiramanFragment> {
 
   AssetImage _getSpeedoImage(int? nilaiKelembapan) {
   if (nilaiKelembapan != null) {
-    if (nilaiKelembapan >= 0 && nilaiKelembapan <= 250) {
+    if (nilaiKelembapan >= 0 && nilaiKelembapan <= 150) {
       return AssetImage('assets/img/speedo1.png');
-    } else if (nilaiKelembapan >= 251 && nilaiKelembapan <= 500) {
+    } else if (nilaiKelembapan >= 151 && nilaiKelembapan <= 300) {
       return AssetImage('assets/img/speedo2.png');
-    } else if (nilaiKelembapan >= 501 && nilaiKelembapan <= 750) {
+    } else if (nilaiKelembapan >= 301 && nilaiKelembapan <= 450) {
       return AssetImage('assets/img/speedo3.png');
-    } else if (nilaiKelembapan >= 751 && nilaiKelembapan <= 1025) {
+    } else if (nilaiKelembapan >= 451 && nilaiKelembapan <= 1025) {
       return AssetImage('assets/img/speedo4.png');
     }
   }

@@ -1,18 +1,44 @@
 part of '../page.dart';
 
-class DetailRegist extends StatelessWidget {
+class DetailRegist extends StatefulWidget {
   const DetailRegist({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final TextEditingController _usernameController = TextEditingController();
-    final TextEditingController _passwordController = TextEditingController();
-    final TextEditingController _addressController = TextEditingController();
-    final TextEditingController _emailController = TextEditingController();
-    final TextEditingController _phoneNumberController = TextEditingController();
+  _DetailRegistState createState() => _DetailRegistState();
+}
 
+class _DetailRegistState extends State<DetailRegist> {
+  late TextEditingController _usernameController;
+  late TextEditingController _passwordController;
+  late TextEditingController _addressController;
+  late TextEditingController _emailController;
+  late TextEditingController _phoneNumberController;
+
+  @override
+  void initState() {
+    super.initState();
+    _usernameController = TextEditingController();
+    _passwordController = TextEditingController();
+    _addressController = TextEditingController();
+    _emailController = TextEditingController();
+    _phoneNumberController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    _addressController.dispose();
+    _emailController.dispose();
+    _phoneNumberController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF30E5D0),
+      resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: ConstrainedBox(
           constraints: BoxConstraints(
@@ -134,8 +160,7 @@ class DetailRegist extends StatelessWidget {
                                   .registerUser(newUser)
                                   .then((_) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content: Text('User registered successfully')),
+                                  SnackBar(content: Text('User registered successfully')),
                                 );
                                 Navigator.pushNamed(context, '/login');
                               }).catchError((error) {

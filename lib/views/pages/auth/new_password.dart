@@ -1,33 +1,52 @@
 part of '../page.dart';
 
-class ResetPasswordPage extends StatelessWidget {
+class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    TextEditingController _passController = TextEditingController();
-    TextEditingController _konfirmPassController = TextEditingController();
+  _ResetPasswordPageState createState() => _ResetPasswordPageState();
+}
 
-    void _savePassword() {
-      String password = _passController.text;
-      String confirmPassword = _konfirmPassController.text;
+class _ResetPasswordPageState extends State<ResetPasswordPage> {
+  late TextEditingController _passController;
+  late TextEditingController _konfirmPassController;
 
-      if (password == confirmPassword) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Berhasil memperbarui kata sandi'),
-          ),
-        );
-        Navigator.pushNamed(context, '/login');
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Kata sandi dan konfirmasi kata sandi harus sama'),
-          ),
-        );
-      }
+  @override
+  void initState() {
+    super.initState();
+    _passController = TextEditingController();
+    _konfirmPassController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _passController.dispose();
+    _konfirmPassController.dispose();
+    super.dispose();
+  }
+
+  void _savePassword() {
+    String password = _passController.text;
+    String confirmPassword = _konfirmPassController.text;
+
+    if (password == confirmPassword) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Berhasil memperbarui kata sandi'),
+        ),
+      );
+      Navigator.pushNamed(context, '/login');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Kata sandi dan konfirmasi kata sandi harus sama'),
+        ),
+      );
     }
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -45,12 +64,12 @@ class ResetPasswordPage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            // Ganti homepageKey sesuai dengan konteks aplikasi Anda
             Navigator.pop(context);
           },
         ),
         elevation: 0,
       ),
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: EdgeInsets.all(20),
         child: Column(
@@ -110,7 +129,6 @@ class ResetPasswordPage extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              height: 50,
               child: TextButton(
                 onPressed: _savePassword,
                 child: Text(

@@ -16,15 +16,15 @@ class JadwalPemupukan extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
+            padding: EdgeInsets.only(bottom: 40),
             width: 300,
-            height: 350,
             decoration: BoxDecoration(
                 border: Border.all(style: BorderStyle.solid),
                 borderRadius: BorderRadius.circular(15)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 30),
+                SizedBox(height: 40),
                 Container(
                   height: 40,
                   width: double.infinity,
@@ -41,7 +41,6 @@ class JadwalPemupukan extends StatelessWidget {
                 SizedBox(height: 35),
                 Container(
                   width: 250,
-                  height: 200,
                   child: Column(
                     children: [
                       Row(
