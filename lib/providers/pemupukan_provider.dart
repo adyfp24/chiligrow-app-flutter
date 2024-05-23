@@ -75,4 +75,9 @@ class PemupukanProvider extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
   }
+
+   Future<void> clearData() async {
+    _jadwalPupuk = null;
+    notifyListeners();
+  }
 }

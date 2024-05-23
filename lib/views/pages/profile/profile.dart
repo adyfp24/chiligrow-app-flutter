@@ -207,7 +207,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             onPressed: () {
                               Navigator.pop(context); // Tutup dialog
                               userProvider
-                                  .logoutUser(context); // Lakukan logout
+                                  .logoutUser(context); 
+                              Provider.of<PemupukanProvider>(context, listen: false).clearData();
                             },
                             child: Text(
                               "Ya",
