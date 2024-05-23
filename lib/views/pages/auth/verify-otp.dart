@@ -115,7 +115,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
             ),
             Container(
               width: double.infinity,
-              height: 50,
+              
               child: TextButton(
                 onPressed: _handleOtpSubmit,
                 child: Text(

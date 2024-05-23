@@ -66,7 +66,7 @@ class ForgetPage extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              height: 50,
+              
               child: TextButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/verify-otp');

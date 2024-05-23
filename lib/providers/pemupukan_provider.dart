@@ -55,7 +55,7 @@ class PemupukanProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateJadwal(JadwalPupuk updatedJadwal) async {
+  Future<void> updateJadwal(int idJadwal, JadwalPupuk updatedJadwal) async {
     _isLoading = true;
     notifyListeners();
 
@@ -63,7 +63,7 @@ class PemupukanProvider extends ChangeNotifier {
       final storedToken = await _secureStorage.read(key: 'token');
       if (storedToken != null) {
         final data = await _pemupukanService.updatePemupukanData(
-            storedToken, updatedJadwal);
+            storedToken, idJadwal, updatedJadwal);
         _jadwalPupuk = data;
         print(_jadwalPupuk);
       }
@@ -71,12 +71,29 @@ class PemupukanProvider extends ChangeNotifier {
       print('Error updating jadwal: $e');
       throw Exception('internal server eror');
     }
-    
+
     _isLoading = true;
     notifyListeners();
   }
 
-   Future<void> clearData() async {
+  Future<void> deleteJadwal(int idJadwal) async {
+    _isLoading = true;
+    notifyListeners();
+    try {
+      final storedToken = await _secureStorage.read(key: 'token');
+      if (storedToken != null) {
+        final deletedJadwal =
+            await _pemupukanService.deletePemupukanData(idJadwal, storedToken);
+      }
+    } catch (e) {
+      print('Error when delete jadwal: $e');
+      throw Exception('internal server eror');
+    }
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> clearData() async {
     _jadwalPupuk = null;
     notifyListeners();
   }
