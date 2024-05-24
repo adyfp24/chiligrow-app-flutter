@@ -10,8 +10,8 @@ import 'package:chiligrow_app/utils/utils.dart';
 import 'package:chiligrow_app/utils/constant.dart';
 
 part 'homepage.dart';
+part 'auth/landing.dart';
 part 'auth/register.dart';
-part 'auth/detail_regist.dart';
 part 'auth/login.dart';
 part 'splash_screen.dart';
 part 'profile/profile.dart';

@@ -13,7 +13,7 @@ class SplashScreen extends StatelessWidget {
     if (token != null) {
       Navigator.pushReplacementNamed(context, '/home');
     } else {
-      Navigator.pushReplacementNamed(context, '/regist');
+      Navigator.pushReplacementNamed(context, '/landing');
     }
   }
 
