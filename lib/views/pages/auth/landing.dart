@@ -3,10 +3,6 @@ part of '../page.dart';
 class LandingPage extends StatelessWidget {
   const LandingPage({Key? key}) : super(key: key);
 
-  void _toDetailRegist(BuildContext context) {
-    Navigator.pushNamed(context, '/regist-detail');
-  }
-
   @override  
   Widget build(BuildContext context) {
     final TapGestureRecognizer _toLogin = TapGestureRecognizer();
@@ -43,12 +39,12 @@ class LandingPage extends StatelessWidget {
               height: 35,
             ),
             Container(
-              width: 260, // Sesuaikan lebar sesuai kebutuhan
-              height: 60, // Sesuaikan tinggi sesuai kebutuhan
+              width: 260, 
+              height: 60, 
               decoration: BoxDecoration(
                 borderRadius:
-                    BorderRadius.circular(25), // Mengatur ujung menjadi bulat
-                color: Color(0xFF30E5D0), // Mengatur warna latar belakang
+                    BorderRadius.circular(25), 
+                color: Color(0xFF30E5D0), 
               ),
               child: TextButton(
                 onPressed: _toDetailRegist,

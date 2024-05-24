@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Align(
               alignment: Alignment.topLeft,
               child: Text(
-                'Log in',
+                'Masuk',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       prefixIcon: Icon(Icons.person),
-                      labelText: 'Username',
+                      labelText: 'Nama pengguna',
                     ),
                   ),
                   SizedBox(height: 25),
@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       prefixIcon: Icon(Icons.lock),
-                      labelText: 'Password',
+                      labelText: 'Kata sandi',
                     ),
                   ),
                   SizedBox(height: 15),
@@ -96,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Align(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        'Lupa Password?',
+                        'Lupa kata sandi?',
                         textAlign: TextAlign.end,
                         style: TextStyle(fontWeight: FontWeight.w500),
                       ),
@@ -110,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                         if (_usernameController.text.isEmpty ||
                             _passwordController.text.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Data harus lengkap')),
+                            SnackBar(content: Text('Data harus lengkap, harap diisi kembali')),
                           );
                           return;
                         }
@@ -129,14 +129,11 @@ class _LoginPageState extends State<LoginPage> {
                           final prefs = FlutterSecureStorage();
                           final token = await prefs.read(key: 'token');
                           print(token);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('User login successfully')),
-                          );
                           Navigator.pushNamed(context, '/home');
                         }).catchError((error) {
                           print(error);
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text('username atau password salah'),
+                            content: Text('nama pengguna atau kata sandi salah'),
                           ));
                         });
                       },
@@ -164,12 +161,12 @@ class _LoginPageState extends State<LoginPage> {
                     child: Text.rich(
                       TextSpan(
                         text: 'Belum memiliki akun? ',
-                        style: TextStyle(color: Colors.grey, fontSize: 18),
+                        style: TextStyle(color: Colors.grey, fontSize: 16),
                         children: [
                           TextSpan(
                             text: 'Daftar',
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 16,
                               fontWeight: FontWeight.bold,
                               color: Color(0xFF30E5D0),
                             ),

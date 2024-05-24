@@ -55,7 +55,7 @@ class _ProfilePageState extends State<ProfilePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Profile',
+                'Data Profil',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 22,
@@ -86,7 +86,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'No. Handphone',
+                  'No. Telepon',
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -151,31 +151,64 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 child: TextButton(
                   onPressed: () {
-                    final user = User(
-                      idUser: loggedInUser.idUser,
-                      username: loggedInUser.username,
-                      password: loggedInUser.password,
-                      alamat: _addressController.text,
-                      email: _emailController.text,
-                      noHP: _phoneNumberController.text,
-                      role: loggedInUser.role,
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text("Konfirmasi"),
+                          content: Text("Apakah anda yakin untuk memperbarui?"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context); // Tutup dialog
+                              },
+                              child: Text("Tidak",
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 218, 54, 42))),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                final user = User(
+                                  idUser: loggedInUser.idUser,
+                                  username: loggedInUser.username,
+                                  password: loggedInUser.password,
+                                  alamat: _addressController.text,
+                                  email: _emailController.text,
+                                  noHP: _phoneNumberController.text,
+                                  role: loggedInUser.role,
+                                );
+                                Provider.of<UserProvider>(context,
+                                        listen: false)
+                                    .updateProfile(user)
+                                    .then((_) {
+                                  getUserData();
+                                  Navigator.pop(context);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content:
+                                            Text('Data akun berhasil dirubah')),
+                                  );
+                                }).catchError((error) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content:
+                                            Text('Data akun gagal diubah')),
+                                  );
+                                });
+                              },
+                              child: Text(
+                                "Ya",
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 63, 151, 66)),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
                     );
-                    Provider.of<UserProvider>(context, listen: false)
-                        .updateProfile(user)
-                        .then((_) {
-                      getUserData();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Profile updated successfully')),
-                      );
-                    }).catchError((error) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                            content: Text('Failed to update profile: $error')),
-                      );
-                    });
                   },
                   child: Text(
-                    'Update Profile',
+                    'Ubah Profil',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 15,
@@ -206,9 +239,10 @@ class _ProfilePageState extends State<ProfilePage> {
                           TextButton(
                             onPressed: () {
                               Navigator.pop(context); // Tutup dialog
-                              userProvider
-                                  .logoutUser(context); 
-                              Provider.of<PemupukanProvider>(context, listen: false).clearData();
+                              userProvider.logoutUser(context);
+                              Provider.of<PemupukanProvider>(context,
+                                      listen: false)
+                                  .clearData();
                             },
                             child: Text(
                               "Ya",
@@ -222,7 +256,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   );
                 },
                 child: Text(
-                  'Logout',
+                  'Keluar',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 15,

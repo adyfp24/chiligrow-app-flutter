@@ -85,7 +85,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             prefixIcon: Icon(Icons.person),
-                            labelText: 'Username',
+                            labelText: 'Nama pengguna',
                           ),
                         ),
                         SizedBox(height: 25),
@@ -96,7 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             prefixIcon: Icon(Icons.lock),
-                            labelText: 'Password',
+                            labelText: 'Kata sandi',
                           ),
                         ),
                         SizedBox(height: 25),
@@ -129,7 +129,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             prefixIcon: Icon(Icons.phone_android_rounded),
-                            labelText: 'No Handphone',
+                            labelText: 'No. Telepon',
                           ),
                         ),
                         SizedBox(height: 20),
@@ -148,7 +148,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 return;
                               }
                               final newUser = User(
-                                idUser: 0, // Sesuaikan dengan kebutuhan backend Anda
+                                idUser: 0,
                                 username: _usernameController.text,
                                 password: _passwordController.text,
                                 alamat: _addressController.text,
@@ -160,12 +160,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                   .registerUser(newUser)
                                   .then((_) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('User RegisterPageed successfully')),
+                                  SnackBar(content: Text('registrasi berhasil')),
                                 );
                                 Navigator.pushNamed(context, '/login');
                               }).catchError((error) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('Failed to RegisterPage user')),
+                                  SnackBar(content: Text('registrasi gagal')),
                                 );
                               });
                             },
