@@ -84,6 +84,7 @@ class PemupukanProvider extends ChangeNotifier {
       if (storedToken != null) {
         final deletedJadwal =
             await _pemupukanService.deletePemupukanData(idJadwal, storedToken);
+        _jadwalPupuk = null;
       }
     } catch (e) {
       print('Error when delete jadwal: $e');

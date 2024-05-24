@@ -1,28 +1,36 @@
 part of '../fragment.dart';
 
-class ModalPemupukanFragment extends StatefulWidget {
-  const ModalPemupukanFragment({Key? key}) : super(key: key);
+class UpdateModal extends StatefulWidget {
+  final int selangHari;
+  final String selangJam;
+
+  const UpdateModal({
+    required this.selangHari,
+    required this.selangJam,
+    Key? key,
+  }) : super(key: key);
 
   @override
-  _ModalPemupukanFragmentState createState() => _ModalPemupukanFragmentState();
+  State<UpdateModal> createState() => _UpdateModalState();
 }
 
-class _ModalPemupukanFragmentState extends State<ModalPemupukanFragment> {
+class _UpdateModalState extends State<UpdateModal> {
   late TextEditingController _dayController;
   late TextEditingController _timeController;
 
   @override
   void initState() {
     super.initState();
-    _dayController = TextEditingController();
-    _timeController = TextEditingController();
+    _dayController = TextEditingController(text: widget.selangHari.toString());
+    _timeController = TextEditingController(text: widget.selangJam);
   }
 
   @override
   Widget build(BuildContext context) {
-    final UserProvider userProvider = Provider.of<UserProvider>(context);
-    final List<User> users = userProvider.users;
-    final User loggedInUser = users.first;
+    final userProvider = Provider.of<UserProvider>(context);
+    final users = userProvider.users;
+    final loggedInUser = users.first;
+
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       content: Container(
@@ -31,50 +39,52 @@ class _ModalPemupukanFragmentState extends State<ModalPemupukanFragment> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             TextFormField(
-              decoration: InputDecoration(
-                  labelText: 'Jenis Pupuk',
-                  prefixIcon: Icon(Icons.app_registration_outlined)),
-            ),
-            SizedBox(height: 10),
-            TextFormField(
               controller: _dayController,
               decoration: InputDecoration(
-                  labelText: 'Selang Hari',
-                  prefixIcon: Icon(Icons.calendar_view_day_sharp)),
+                labelText: 'Selang Hari',
+                prefixIcon: Icon(Icons.app_registration_outlined),
+              ),
             ),
             SizedBox(height: 10),
             TextFormField(
               controller: _timeController,
               decoration: InputDecoration(
-                  labelText: 'Selang Waktu',
-                  prefixIcon: Icon(Icons.timer_outlined)),
+                labelText: 'Selang Jam',
+                prefixIcon: Icon(Icons.calendar_view_day_sharp),
+              ),
             ),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                final newJadwal = JadwalPupuk(
-                  0,
-                  int.parse(_dayController.text),
-                  _timeController.text,
-                  loggedInUser.idUser,
-                );
                 final _pemupukanProvider = Provider.of<PemupukanProvider>(
                   context,
                   listen: false,
                 );
-                _pemupukanProvider.createPemupukan(newJadwal).then((_) {
+
+                final updatedJadwal = JadwalPupuk(
+                  _pemupukanProvider.jadwalPupuk!.idJadwalPupuk,
+                  int.parse(_dayController.text),
+                  _timeController.text,
+                  loggedInUser.idUser,
+                );
+
+
+                _pemupukanProvider
+                    .updateJadwal(updatedJadwal.idJadwalPupuk, updatedJadwal)
+                    .then((_) {
                   Navigator.pop(context);
                   homepageKey.currentState?.setSelectedIndex(2);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('jadwal berhasil dibuat'),
+                      content: Text('Jadwal pupuk berhasil diupdate'),
                     ),
                   );
                 }).catchError((error) {
                   print(error);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                        content: Text('gagal membuat jadwal pempupukan: $error')),
+                      content: Text('Gagal memperbarui jadwal: $error'),
+                    ),
                   );
                 });
               },
@@ -93,4 +103,3 @@ class _ModalPemupukanFragmentState extends State<ModalPemupukanFragment> {
     super.dispose();
   }
 }
-

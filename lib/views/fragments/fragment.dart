@@ -15,5 +15,6 @@ part 'pemupukan/pemupukan_empty.dart';
 part 'pemupukan/modal_fragment.dart';
 part 'pemupukan/history_pemupukan.dart';
 part 'pemupukan/jadwal_pemupukan.dart';
+part 'pemupukan/update_modal.dart';
 
 

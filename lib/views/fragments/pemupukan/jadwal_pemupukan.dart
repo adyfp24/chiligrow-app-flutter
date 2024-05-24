@@ -11,6 +11,8 @@ class JadwalPemupukan extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _pemupukanProvider =
+        Provider.of<PemupukanProvider>(context, listen: false);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -82,7 +84,27 @@ class JadwalPemupukan extends StatelessWidget {
                         height: 35,
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          final idJadwal =
+                              _pemupukanProvider.jadwalPupuk!.idJadwalPupuk;
+                          _pemupukanProvider.deleteJadwal(idJadwal).then((_) {
+                            _pemupukanProvider.getPemupukanData();
+                            homepageKey.currentState?.setSelectedIndex(2);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('jadwal berhasil dihapus'),
+                              ),
+                            );
+                          }).catchError((error) {
+                            print(error);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                  content: Text(
+                                      'gagal menghapus jadwal: $error')),
+                            );
+                          });
+                          ;
+                        },
                         child: Align(
                           alignment: Alignment.center,
                           child: Row(
@@ -114,7 +136,17 @@ class JadwalPemupukan extends StatelessWidget {
                         height: 15,
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return UpdateModal(
+                                selangHari: selangHari,
+                                selangJam: selangJam,
+                              );
+                            },
+                          );
+                        },
                         child: Align(
                           alignment: Alignment.center,
                           child: Row(
