@@ -109,11 +109,6 @@ class _SimulasiFragmentState extends State<SimulasiFragment> {
                   listen: false,
                 );
                 _simulasiProvider.createSimulasi(newSimulasi).then((_) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('simulation created successfully'),
-                    ),
-                  );
                   if (_simulasiProvider.simulasiPenanaman != null) {
                     final simulasiData = {
                       'luasLahan': _simulasiProvider
@@ -138,7 +133,7 @@ class _SimulasiFragmentState extends State<SimulasiFragment> {
                   print(error);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                        content: Text('Failed to create schedule: $error')),
+                        content: Text('Gagal membuat data simulasi: $error')),
                   );
                 });
               },

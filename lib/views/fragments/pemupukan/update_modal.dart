@@ -76,14 +76,14 @@ class _UpdateModalState extends State<UpdateModal> {
                   homepageKey.currentState?.setSelectedIndex(2);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('Jadwal pupuk berhasil diupdate'),
+                      content: Text('Data jadwal pemupukan berhasil diubah'),
                     ),
                   );
                 }).catchError((error) {
                   print(error);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('Gagal memperbarui jadwal: $error'),
+                      content: Text('data jadwal pemupukan gagal diubah'),
                     ),
                   );
                 });

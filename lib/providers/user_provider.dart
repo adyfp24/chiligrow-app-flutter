@@ -46,20 +46,20 @@ class UserProvider extends ChangeNotifier {
 
   Future<void> logoutUser(BuildContext context) async {
     Navigator.pushNamed(context, '/login');
-    final storedToken = await _secureStorage.delete(key: 'token'); 
-     _token = null;
+    final storedToken = await _secureStorage.delete(key: 'token');
+    _token = null;
   }
 
   Future<void> getProfile() async {
     _isLoading = true;
-     WidgetsBinding.instance?.addPostFrameCallback((_) {
-      notifyListeners(); 
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      notifyListeners();
     });
     try {
       final storedToken = await _secureStorage.read(key: 'token');
       if (storedToken != null) {
         final responseData = await _userService.getProfile(storedToken);
-        _users.clear(); 
+        _users.clear();
         _users.add(User.fromJson(responseData['data']));
       }
     } catch (e) {
@@ -81,6 +81,22 @@ class UserProvider extends ChangeNotifier {
     } catch (e) {
       print('Error updating profile: $e');
       throw Exception('Failed to update profile');
+    }
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> forgetPass() async {
+    _isLoading = true;
+    notifyListeners();
+    try {
+      final storedToken = await _secureStorage.read(key: 'token');
+      if (storedToken != null) {
+        await _userService.getOTP(storedToken);
+      }
+    } catch (e) {
+      print('Error when get OTP: $e');
+      throw Exception('Failed to get OTP');
     }
     _isLoading = false;
     notifyListeners();

@@ -55,4 +55,17 @@ class UserService {
       return ApiHelper.handleError(e);
     }
   }
+
+  Future<void> getOTP (String token) async {
+    final url = Uri.parse('${ApiHelper.baseUrl}/forget');
+    try {
+      final response = await http.post(
+        url,
+        headers: ApiHelper.getHeaders(token),
+      );
+      return ApiHelper.handleResponse(response);
+    } catch (e) {
+      return ApiHelper.handleError(e);
+    }
+  }
 }
