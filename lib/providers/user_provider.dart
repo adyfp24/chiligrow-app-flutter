@@ -116,11 +116,11 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> resetPassword (String newPassword) async {
+  Future<void> resetPassword (String email, String newPassword) async {
     _isLoading = true;
     notifyListeners();
     try {
-      await _userService.resetPassword(newPassword);
+      await _userService.resetPassword(email, newPassword);
     } catch (e) {
       print('Error when reset password: $e');
       throw Exception('Failed to reset password');
@@ -129,3 +129,4 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
+

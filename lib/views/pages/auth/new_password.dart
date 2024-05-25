@@ -30,12 +30,20 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     String confirmPassword = _konfirmPassController.text;
 
     if (password == confirmPassword) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Berhasil memperbarui kata sandi'),
-        ),
-      );
-      Navigator.pushNamed(context, '/login');
+      final _userProvider = Provider.of<UserProvider>(context, listen: false);
+      _userProvider
+          .resetPassword(_userProvider.otp!.email, password)
+          .then((_) => {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Berhasil memperbarui kata sandi'),
+                  ),
+                ),
+                Navigator.pushNamed(context, '/login')
+              })
+          .catchError((error) {
+        print(error);
+      });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

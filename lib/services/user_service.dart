@@ -85,19 +85,20 @@ class UserService {
     }
   }
 
-  Future<void> resetPassword (String newPassword) async {
+  Future<void> resetPassword (String email, String newPassword) async {
     final url = Uri.parse('${ApiHelper.baseUrl}/reset-password');
     try {
-      final response = await http.post(
+      final response = await http.put(
         url,
         headers: ApiHelper.getHeaders(''),
-        body: jsonEncode({'new_password': newPassword})
+        body: jsonEncode({'email': email, 'password': newPassword})
       );
       return ApiHelper.handleResponse(response);
     } catch (e) {
       return ApiHelper.handleError(e);
     }
   }
+
 }
 
 
