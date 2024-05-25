@@ -56,12 +56,42 @@ class UserService {
     }
   }
 
-  Future<void> getOTP (String token) async {
+  Future<int> getOTP (String email) async {
     final url = Uri.parse('${ApiHelper.baseUrl}/forget');
     try {
       final response = await http.post(
         url,
-        headers: ApiHelper.getHeaders(token),
+        headers: ApiHelper.getHeaders(''),
+        body: jsonEncode({'email': email})
+      );
+      final responseData = ApiHelper.handleResponse(response);
+      return int.parse(responseData['data']['otp']);
+    } catch (e) {
+      return ApiHelper.handleError(e);
+    }
+  }
+
+  Future<void> verifyOTP (OTP otp) async {
+    final url = Uri.parse('${ApiHelper.baseUrl}/verify-otp');
+    try {
+      final response = await http.post(
+        url,
+        headers: ApiHelper.getHeaders(''),
+        body: jsonEncode(otp.toJson())
+      );
+      return ApiHelper.handleResponse(response);
+    } catch (e) {
+      return ApiHelper.handleError(e);
+    }
+  }
+
+  Future<void> resetPassword (String newPassword) async {
+    final url = Uri.parse('${ApiHelper.baseUrl}/reset-password');
+    try {
+      final response = await http.post(
+        url,
+        headers: ApiHelper.getHeaders(''),
+        body: jsonEncode({'new_password': newPassword})
       );
       return ApiHelper.handleResponse(response);
     } catch (e) {
@@ -69,3 +99,5 @@ class UserService {
     }
   }
 }
+
+

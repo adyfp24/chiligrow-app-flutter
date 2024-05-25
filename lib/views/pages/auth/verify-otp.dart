@@ -8,13 +8,23 @@ class VerifyOtpPage extends StatefulWidget {
 }
 
 class _VerifyOtpPageState extends State<VerifyOtpPage> {
-  final List<TextEditingController> _otpControllers = List.generate(6, (_) => TextEditingController());
+  final List<TextEditingController> _otpControllers =
+      List.generate(6, (_) => TextEditingController());
   final List<FocusNode> _focusNodes = List.generate(6, (_) => FocusNode());
-
   void _handleOtpSubmit() {
     String otp = _otpControllers.map((controller) => controller.text).join();
     if (otp.length == 6) {
-      Navigator.pushNamed(context, '/reset-password');
+      final _userProvider = Provider.of<UserProvider>(context, listen: false);
+      final verifOtp = OTP(
+        _userProvider.otp!.email,
+        int.parse(otp),
+      );
+      _userProvider
+          .verifyOTP(verifOtp)
+          .then((_) => Navigator.pushNamed(context, '/reset-password'))
+          .catchError((error) {
+        print(error);
+      });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -99,11 +109,14 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                     style: TextStyle(fontSize: 24),
                     onChanged: (value) {
                       if (value.length == 1 && index < 5) {
-                        FocusScope.of(context).requestFocus(_focusNodes[index + 1]);
+                        FocusScope.of(context)
+                            .requestFocus(_focusNodes[index + 1]);
                       } else if (value.isEmpty && index > 0) {
-                        FocusScope.of(context).requestFocus(_focusNodes[index - 1]);
+                        FocusScope.of(context)
+                            .requestFocus(_focusNodes[index - 1]);
                       } else if (index == 5 && value.length == 1) {
-                        FocusScope.of(context).unfocus(); // Menyembunyikan keyboard jika panjang teks adalah 6
+                        FocusScope.of(context)
+                            .unfocus(); // Menyembunyikan keyboard jika panjang teks adalah 6
                       }
                     },
                   ),
@@ -115,7 +128,6 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
             ),
             Container(
               width: double.infinity,
-              
               child: TextButton(
                 onPressed: _handleOtpSubmit,
                 child: Text(
@@ -141,4 +153,3 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
     );
   }
 }
-

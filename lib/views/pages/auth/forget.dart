@@ -5,6 +5,7 @@ class ForgetPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _userProvider = Provider.of<UserProvider>(context, listen: false);
     final TextEditingController _emailController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
@@ -66,10 +67,15 @@ class ForgetPage extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              
               child: TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/verify-otp');
+                  final email = _emailController.text;
+                  _userProvider
+                      .forgetPass(email)
+                      .then((_) => {Navigator.pushNamed(context, '/verify-otp')})
+                      .catchError((error) {
+                    print(error);
+                  });
                 },
                 child: Text(
                   'Selanjutnya',

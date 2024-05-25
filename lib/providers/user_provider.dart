@@ -13,6 +13,9 @@ class UserProvider extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
+  OTP? _otp;
+  OTP? get otp => _otp;
+
   Future<void> registerUser(User newUser) async {
     _isLoading = true;
     notifyListeners();
@@ -86,17 +89,41 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> forgetPass() async {
+  Future<void> forgetPass(String email) async {
     _isLoading = true;
     notifyListeners();
     try {
-      final storedToken = await _secureStorage.read(key: 'token');
-      if (storedToken != null) {
-        await _userService.getOTP(storedToken);
-      }
+      final otpValue = await _userService.getOTP(email);
+      _otp = OTP(email, otpValue);
     } catch (e) {
       print('Error when get OTP: $e');
       throw Exception('Failed to get OTP');
+    }
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> verifyOTP (OTP otp) async {
+    _isLoading = true;
+    notifyListeners();
+    try {
+      await _userService.verifyOTP(otp);
+    } catch (e) {
+      print('Error when verify OTP: $e');
+      throw Exception('Failed to verify OTP');
+    }
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> resetPassword (String newPassword) async {
+    _isLoading = true;
+    notifyListeners();
+    try {
+      await _userService.resetPassword(newPassword);
+    } catch (e) {
+      print('Error when reset password: $e');
+      throw Exception('Failed to reset password');
     }
     _isLoading = false;
     notifyListeners();
