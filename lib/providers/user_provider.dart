@@ -73,6 +73,11 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<String?> getTokenFromStorage() async {
+    final storedToken = await _secureStorage.read(key: 'token');
+    return storedToken;
+  }
+
   Future<void> updateProfile(User user) async {
     _isLoading = true;
     notifyListeners();

@@ -22,12 +22,22 @@ class _ProfilePageState extends State<ProfilePage> {
     _addressController = TextEditingController();
     _emailController = TextEditingController();
     _phoneNumberController = TextEditingController();
+    checkToken();
     getUserData();
   }
 
   void getUserData() {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     userProvider.getProfile();
+  }
+
+  Future<void> checkToken() async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final token = await userProvider.getTokenFromStorage();
+    if (token == null) {
+      // Jika tidak ada token, arahkan pengguna ke halaman login
+      Navigator.pushReplacementNamed(context, '/login');
+    }
   }
 
   @override
@@ -201,18 +211,19 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                         content:
-                                            Text('Data akun berhasil dirubah')),
+                                            Text('Data akun berhasil diubah')),
                                   );
                                 }).catchError((error) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
+                                  Navigator.pop(context);
+                                  ScaffoldMessenger.of(context).showSnackBar(             
                                     SnackBar(
                                         content:
-                                            Text('Data akun gagal diubah')),
+                                            Text('Data harus lengkap, harap diisi kembali')),
                                   );
                                 });
                               },
                               child: Text(
-                                "Ya",
+                                "Iya",
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 63, 151, 66)),
                               ),

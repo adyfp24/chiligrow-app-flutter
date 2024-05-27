@@ -15,6 +15,11 @@ class HomePageState extends State<HomePage> {
       _selectedIndex = index;
     });
   }
+
+  @override
+  void initState() {
+    super.initState();
+  }
  
   @override
   Widget build(BuildContext context) {

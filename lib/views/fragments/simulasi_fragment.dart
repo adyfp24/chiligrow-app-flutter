@@ -65,6 +65,8 @@ class _SimulasiFragmentState extends State<SimulasiFragment> {
                       children: [
                         TextField(
                           controller: _lahanController,
+                          keyboardType: TextInputType.phone,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
