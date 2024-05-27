@@ -113,7 +113,7 @@ class _HomeFragmentState extends State<HomeFragment> {
             ),
           ),
         ),
-        SizedBox(height: 25),
+        SizedBox(height: 30),
         Container(
           width: 300,
           height: 180,
@@ -125,38 +125,8 @@ class _HomeFragmentState extends State<HomeFragment> {
             ),
           ),
         ),
-        SizedBox(height: 5),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 13,
-              height: 13,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Color.fromRGBO(0, 133, 117, 1),
-              ),
-            ),
-            SizedBox(width: 8),
-            Container(
-              width: 13,
-              height: 13,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.grey,
-              ),
-            ),
-            SizedBox(width: 8),
-            Container(
-              width: 13,
-              height: 13,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.grey,
-              ),
-            ),
-          ],
-        ),
+        SizedBox(height: 10),
+        
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [

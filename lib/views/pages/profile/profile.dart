@@ -12,6 +12,10 @@ class _ProfilePageState extends State<ProfilePage> {
   late TextEditingController _emailController;
   late TextEditingController _phoneNumberController;
 
+  late String _initialAddress;
+  late String _initialEmail;
+  late String _initialPhoneNumber;
+
   @override
   void initState() {
     super.initState();
@@ -39,6 +43,11 @@ class _ProfilePageState extends State<ProfilePage> {
     _emailController.text = loggedInUser.email;
     _phoneNumberController.text = loggedInUser.noHP;
     _addressController.text = loggedInUser.alamat;
+
+    // Menyimpan nilai awal
+    _initialEmail = loggedInUser.email;
+    _initialPhoneNumber = loggedInUser.noHP;
+    _initialAddress = loggedInUser.alamat;
 
     return SafeArea(
       child: Scaffold(
@@ -96,6 +105,8 @@ class _ProfilePageState extends State<ProfilePage> {
               SizedBox(height: 5),
               TextField(
                 controller: _phoneNumberController,
+                keyboardType: TextInputType.phone,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.green),
@@ -160,6 +171,10 @@ class _ProfilePageState extends State<ProfilePage> {
                           actions: [
                             TextButton(
                               onPressed: () {
+                                // Mengembalikan nilai awal jika batal
+                                _emailController.text = _initialEmail;
+                                _phoneNumberController.text = _initialPhoneNumber;
+                                _addressController.text = _initialAddress;
                                 Navigator.pop(context); // Tutup dialog
                               },
                               child: Text("Tidak",
@@ -245,7 +260,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   .clearData();
                             },
                             child: Text(
-                              "Ya",
+                              "Iya",
                               style: TextStyle(
                                   color: Color.fromARGB(255, 63, 151, 66)),
                             ),
