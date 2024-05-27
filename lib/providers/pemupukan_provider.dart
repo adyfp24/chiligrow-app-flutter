@@ -6,6 +6,9 @@ class PemupukanProvider extends ChangeNotifier {
   JadwalPupuk? get jadwalPupuk => _jadwalPupuk;
   PemupukanProvider(this._pemupukanService);
 
+  List<RiwayatPupuk>? _riwayatPupuk;
+  List<RiwayatPupuk>? get riwayatPupuk => _riwayatPupuk;
+
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
@@ -96,6 +99,24 @@ class PemupukanProvider extends ChangeNotifier {
 
   Future<void> clearData() async {
     _jadwalPupuk = null;
+    notifyListeners();
+  }
+
+  Future<void> getAllHistory() async{
+     _isLoading = true;
+    notifyListeners();
+    try{
+      final storedToken = await _secureStorage.read(key: 'token');
+      if (storedToken != null) {
+        final data =
+            await _pemupukanService.getHistoryData(storedToken);
+        _riwayatPupuk = data;
+      }
+    }catch(e){
+      print('Error when get history pemupukan: $e');
+      throw Exception('internal server eror ');
+    }
+     _isLoading = false;
     notifyListeners();
   }
 }

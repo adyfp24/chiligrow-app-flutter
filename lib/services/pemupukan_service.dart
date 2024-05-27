@@ -99,4 +99,29 @@ class PemupukanService {
       throw Exception('internal server eror $e');
     }
   }
+
+  Future<List<RiwayatPupuk>> getHistoryData(String token) async {
+  final url = Uri.parse('${ApiHelper.baseUrl}/riwayat-pemupukan');
+  try {
+    final response = await http.get(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+    );
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body)['data'] as List;
+      final riwayatPupuk = responseData.map((json) => RiwayatPupuk.fromJson(json)).toList();
+      print(responseData);
+      return riwayatPupuk;
+    } else {
+      throw Exception('Gagal mendapat history pemupukan');
+    }
+  } catch (e) {
+    print('Error get history pemupukan: $e');
+    throw Exception('Internal server error $e');
+  }
+}
+
 }
