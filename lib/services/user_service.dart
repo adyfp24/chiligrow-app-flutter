@@ -56,20 +56,23 @@ class UserService {
     }
   }
 
-  Future<int> getOTP (String email) async {
-    final url = Uri.parse('${ApiHelper.baseUrl}/forget');
-    try {
-      final response = await http.post(
-        url,
-        headers: ApiHelper.getHeaders(''),
-        body: jsonEncode({'email': email})
-      );
-      final responseData = ApiHelper.handleResponse(response);
-      return int.parse(responseData['data']['otp']);
-    } catch (e) {
-      return ApiHelper.handleError(e);
+  Future<int> getOTP(String email) async {
+  final url = Uri.parse('${ApiHelper.baseUrl}/forget');
+  try {
+    final response = await http.post(
+      url,
+      headers: ApiHelper.getHeaders(''),
+      body: jsonEncode({'email': email})
+    );
+    final responseData = ApiHelper.handleResponse(response);
+    if (!responseData['success']) {
+      throw Exception(responseData['message']);
     }
+    return int.parse(responseData['data']['otp']);
+  } catch (e) {
+    throw ApiHelper.handleError(e);
   }
+}
 
   Future<void> verifyOTP (OTP otp) async {
     final url = Uri.parse('${ApiHelper.baseUrl}/verify-otp');

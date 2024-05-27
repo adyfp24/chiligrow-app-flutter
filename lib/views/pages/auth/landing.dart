@@ -9,7 +9,7 @@ class LandingPage extends StatelessWidget {
     _toLogin.onTap = () {
       Navigator.pushNamed(context, '/login');
     };
-  
+    
     void _toDetailRegist(){
       Navigator.pushNamed(context, '/regist');
     }
@@ -20,7 +20,7 @@ class LandingPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Daftar',
+              'Selamat Datang',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(

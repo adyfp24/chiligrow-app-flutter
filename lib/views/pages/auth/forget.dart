@@ -7,7 +7,24 @@ class ForgetPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final _userProvider = Provider.of<UserProvider>(context, listen: false);
     final TextEditingController _emailController = TextEditingController();
+    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+    void _showSnackbar(String message) {
+      _scaffoldKey.currentState?.showSnackBar(
+        SnackBar(
+          content: Text(message),
+          duration: Duration(seconds: 3),
+        ),
+      );
+    }
+
+    bool _isEmailValid(String email) {
+      final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+      return emailRegex.hasMatch(email);
+    }
+
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text(
           'Ubah Kata Sandi',
@@ -24,7 +41,7 @@ class ForgetPage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            homepageKey.currentState!.setSelectedIndex(0);
+            Navigator.pop(context);
           },
         ),
         elevation: 0,
@@ -70,12 +87,21 @@ class ForgetPage extends StatelessWidget {
               child: TextButton(
                 onPressed: () {
                   final email = _emailController.text;
-                  _userProvider
-                      .forgetPass(email)
-                      .then((_) => {Navigator.pushNamed(context, '/verify-otp')})
-                      .catchError((error) {
-                    print(error);
-                  });
+                  if (email.isEmpty) {
+                    _showSnackbar('Email tidak valid');
+                  } else if (!_isEmailValid(email)) {
+                    _showSnackbar('Email tidak valid');
+                  } else {
+                    _userProvider.forgetPass(email).then((_) {
+                      Navigator.pushNamed(context, '/verify-otp');
+                    }).catchError((error) {
+                      if (error.toString().contains('Email tidak terdaftar')) {
+                        _showSnackbar('Email tidak valid');
+                      } else {
+                        _showSnackbar('Email tidak valid');
+                      }
+                    });
+                  }
                 },
                 child: Text(
                   'Selanjutnya',
@@ -87,7 +113,6 @@ class ForgetPage extends StatelessWidget {
                 ),
                 style: TextButton.styleFrom(
                   backgroundColor: Kgreen2,
-                  // primary: Colors.white,
                   padding: EdgeInsets.symmetric(vertical: 18, horizontal: 20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),

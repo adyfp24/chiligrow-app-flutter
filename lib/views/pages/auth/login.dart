@@ -129,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                           final prefs = FlutterSecureStorage();
                           final token = await prefs.read(key: 'token');
                           print(token);
-                          Navigator.pushNamed(context, '/home');
+                          Navigator.pushReplacementNamed(context, '/home');
                         }).catchError((error) {
                           print(error);
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(

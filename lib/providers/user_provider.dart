@@ -48,7 +48,7 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<void> logoutUser(BuildContext context) async {
-    Navigator.pushNamed(context, '/login');
+    Navigator.pushReplacementNamed(context, '/login');
     final storedToken = await _secureStorage.delete(key: 'token');
     _token = null;
   }
@@ -102,13 +102,15 @@ class UserProvider extends ChangeNotifier {
       _otp = OTP(email, otpValue);
     } catch (e) {
       print('Error when get OTP: $e');
-      throw Exception('Failed to get OTP');
+      _isLoading = false;
+      notifyListeners();
+      throw e; // Lempar pengecualian ke UI
     }
     _isLoading = false;
     notifyListeners();
   }
 
-  Future<void> verifyOTP (OTP otp) async {
+  Future<void> verifyOTP(OTP otp) async {
     _isLoading = true;
     notifyListeners();
     try {
@@ -121,7 +123,7 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> resetPassword (String email, String newPassword) async {
+  Future<void> resetPassword(String email, String newPassword) async {
     _isLoading = true;
     notifyListeners();
     try {
@@ -134,4 +136,3 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
-

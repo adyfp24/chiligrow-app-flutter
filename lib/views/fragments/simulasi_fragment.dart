@@ -66,7 +66,9 @@ class _SimulasiFragmentState extends State<SimulasiFragment> {
                         TextField(
                           controller: _lahanController,
                           keyboardType: TextInputType.phone,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
@@ -104,6 +106,14 @@ class _SimulasiFragmentState extends State<SimulasiFragment> {
             SizedBox(height: 25),
             TextButton(
               onPressed: () {
+                if (_lahanController.text.isEmpty || _selectedBibit == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Harap masukkan data dengan benar'),
+                    ),
+                  );
+                  return; // Menghentikan proses lebih lanjut jika ada yang kosong
+                }
                 final newSimulasi = Simulasi(_selectedBibit!,
                     int.parse(_lahanController.text), 0, 0, 0, 0, 0);
                 final _simulasiProvider = Provider.of<SimulasiProvider>(
@@ -124,8 +134,8 @@ class _SimulasiFragmentState extends State<SimulasiFragment> {
                           .toString(),
                       'pupukNpk': _simulasiProvider.simulasiPenanaman!.pupukNpk
                           .toString(),
-                      'volumeAir':
-                          _simulasiProvider.simulasiPenanaman!.volumeAir
+                      'volumeAir': _simulasiProvider
+                          .simulasiPenanaman!.volumeAir
                           .toString(),
                     };
                     Navigator.pushNamed(context, '/hasil-simulasi',

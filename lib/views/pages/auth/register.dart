@@ -124,6 +124,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         SizedBox(height: 25),
                         TextField(
                           controller: _phoneNumberController,
+                          keyboardType: TextInputType.phone,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
@@ -143,7 +147,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                   _phoneNumberController.text.isEmpty ||
                                   _addressController.text.isEmpty) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('Data harus lengkap')),
+                                  SnackBar(
+                                      content: Text(
+                                          'Harap masukkan data dengan benar')),
                                 );
                                 return;
                               }
@@ -160,7 +166,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                   .registerUser(newUser)
                                   .then((_) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('registrasi berhasil')),
+                                  SnackBar(
+                                      content: Text('registrasi berhasil')),
                                 );
                                 Navigator.pushNamed(context, '/login');
                               }).catchError((error) {
@@ -179,7 +186,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             style: TextButton.styleFrom(
                               backgroundColor: Color(0xFF30E5D0),
-                              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 15, horizontal: 20),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.0),
                               ),

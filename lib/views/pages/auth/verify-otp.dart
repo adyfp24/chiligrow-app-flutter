@@ -115,8 +115,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                         FocusScope.of(context)
                             .requestFocus(_focusNodes[index - 1]);
                       } else if (index == 5 && value.length == 1) {
-                        FocusScope.of(context)
-                            .unfocus(); // Menyembunyikan keyboard jika panjang teks adalah 6
+                        FocusScope.of(context).unfocus();
                       }
                     },
                   ),
@@ -124,7 +123,28 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
               }),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05,
+              height: MediaQuery.of(context).size.height * 0.03,
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: InkWell(
+                child: Text(
+                  'Kirim ulang kode OTP',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                onTap: () {
+                  final _userProvider =
+                      Provider.of<UserProvider>(context, listen: false);
+                  _userProvider.forgetPass(_userProvider.otp!.email);
+                },
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.03,
             ),
             Container(
               width: double.infinity,
