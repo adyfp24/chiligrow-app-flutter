@@ -149,7 +149,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 ),
                 style: TextButton.styleFrom(
                   backgroundColor: Kgreen2,
-                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                  padding: EdgeInsets.symmetric(vertical: 18, horizontal: 20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),

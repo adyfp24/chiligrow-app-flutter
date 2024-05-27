@@ -58,11 +58,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                 width: 90,
               ),
               Row(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.notification_add_sharp),
-                  ),
+                 children: [
                   InkWell(
                     child: Container(
                       width: 50,
