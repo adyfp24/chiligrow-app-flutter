@@ -30,28 +30,55 @@ class _ModalPemupukanFragmentState extends State<ModalPemupukanFragment> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            TextFormField(
-              decoration: InputDecoration(
-                  labelText: 'Jenis Pupuk',
-                  prefixIcon: Icon(Icons.app_registration_outlined)),
-            ),
             SizedBox(height: 10),
             TextFormField(
               controller: _dayController,
               decoration: InputDecoration(
-                  labelText: 'Selang Hari',
-                  prefixIcon: Icon(Icons.calendar_view_day_sharp)),
+                labelText: 'Selang Hari',
+                prefixIcon: Icon(Icons.calendar_view_day_sharp),
+              ),
             ),
             SizedBox(height: 10),
             TextFormField(
               controller: _timeController,
               decoration: InputDecoration(
-                  labelText: 'Selang Waktu',
-                  prefixIcon: Icon(Icons.timer_outlined)),
+                labelText: 'Selang Waktu',
+                prefixIcon: Icon(Icons.timer_outlined),
+              ),
             ),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
+                if (_dayController.text.isEmpty || _timeController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Masukkan data dengan benar'),
+                    ),
+                  );
+                  return;
+                }
+
+                int? selangHari;
+                try {
+                  selangHari = int.parse(_dayController.text);
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Masukkan data dengan benar'),
+                    ),
+                  );
+                  return;
+                }
+
+                if (_timeController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Masukkan data dengan benar'),
+                    ),
+                  );
+                  return;
+                }
+
                 final newJadwal = JadwalPupuk(
                   0,
                   int.parse(_dayController.text),
@@ -74,7 +101,8 @@ class _ModalPemupukanFragmentState extends State<ModalPemupukanFragment> {
                   print(error);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                        content: Text('gagal membuat jadwal pempupukan: $error')),
+                      content: Text('Masukkan data dengan benar'),
+                    ),
                   );
                 });
               },
@@ -93,4 +121,3 @@ class _ModalPemupukanFragmentState extends State<ModalPemupukanFragment> {
     super.dispose();
   }
 }
-

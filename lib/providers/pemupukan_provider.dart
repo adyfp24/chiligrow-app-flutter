@@ -31,7 +31,7 @@ class PemupukanProvider extends ChangeNotifier {
       }
     } catch (e) {
       print('Error adding jadwal: $e');
-      throw Exception('internal server eror');
+      throw Exception('internal server eror $e');
     }
 
     _isLoading = false;

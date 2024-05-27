@@ -90,11 +90,7 @@ class JadwalPemupukan extends StatelessWidget {
                           _pemupukanProvider.deleteJadwal(idJadwal).then((_) {
                             _pemupukanProvider.getPemupukanData();
                             homepageKey.currentState?.setSelectedIndex(2);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('jadwal berhasil dihapus'),
-                              ),
-                            );
+                          
                           }).catchError((error) {
                             print(error);
                             ScaffoldMessenger.of(context).showSnackBar(

@@ -23,12 +23,14 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
           .verifyOTP(verifOtp)
           .then((_) => Navigator.pushNamed(context, '/reset-password'))
           .catchError((error) {
-        print(error);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('kode OTP salah')),
+        );
       });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Kode OTP harus terdiri dari 6 angka'),
+          content: Text('Kode OTP salah'),
         ),
       );
     }
