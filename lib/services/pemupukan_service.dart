@@ -111,17 +111,25 @@ class PemupukanService {
       },
     );
     if (response.statusCode == 200) {
-      final responseData = json.decode(response.body)['data'] as List;
-      final riwayatPupuk = responseData.map((json) => RiwayatPupuk.fromJson(json)).toList();
-      print(responseData);
-      return riwayatPupuk;
+      final Map<String, dynamic> responseBody = json.decode(response.body);
+      if (responseBody['data'] != null) {
+        final List<dynamic> responseData = responseBody['data'];
+        final riwayatPupuk = responseData.map((json) => RiwayatPupuk.fromJson(json)).toList();
+        print('Data received: $responseData');
+        return riwayatPupuk;
+      } else {
+        print('No data field in response: $responseBody');
+        throw Exception('Gagal mendapat history pemupukan: data field not found');
+      }
     } else {
+      print('Failed to fetch data: ${response.statusCode} ${response.reasonPhrase}');
       throw Exception('Gagal mendapat history pemupukan');
     }
   } catch (e) {
     print('Error get history pemupukan: $e');
-    throw Exception('Internal server error $e');
+    throw Exception('Internal server error: $e');
   }
 }
+
 
 }

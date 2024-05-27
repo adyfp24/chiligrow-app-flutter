@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:chiligrow_app/providers/provider.dart';
 import 'dart:async';
 import '../../models/model.dart';
+import 'package:chiligrow_app/utils/constant.dart';
 
 part 'home_fragment.dart';
 part 'penyiraman_fragment.dart';

@@ -102,21 +102,25 @@ class PemupukanProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getAllHistory() async{
-     _isLoading = true;
+  Future<void> getAllHistory() async {
+    _isLoading = true;
     notifyListeners();
-    try{
+    try {
       final storedToken = await _secureStorage.read(key: 'token');
       if (storedToken != null) {
-        final data =
-            await _pemupukanService.getHistoryData(storedToken);
+        print('Stored token: $storedToken');
+        final data = await _pemupukanService.getHistoryData(storedToken);
         _riwayatPupuk = data;
+      } else {
+        print('Token not found in secure storage');
+        throw Exception('Token not found');
       }
-    }catch(e){
+    } catch (e) {
       print('Error when get history pemupukan: $e');
-      throw Exception('internal server eror ');
+      throw Exception('Internal server error: $e');
+    } finally {
+      _isLoading = false;
+      notifyListeners();
     }
-     _isLoading = false;
-    notifyListeners();
   }
 }
