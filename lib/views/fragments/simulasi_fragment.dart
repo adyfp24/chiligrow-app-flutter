@@ -63,17 +63,28 @@ class _SimulasiFragmentState extends State<SimulasiFragment> {
                     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                     child: Column(
                       children: [
-                        TextField(
-                          controller: _lahanController,
-                          keyboardType: TextInputType.phone,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                controller: _lahanController,
+                                keyboardType: TextInputType.phone,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly,
+                                ],
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  labelText: 'Luas lahan',
+                                ),
                               ),
-                              labelText: 'Luas lahan'),
+                            ),
+                            SizedBox(
+                                width:
+                                    15), // Add some spacing between the TextField and the Text widget
+                            Text('m²', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                          ],
                         ),
                         SizedBox(height: 20),
                         DropdownButtonFormField<String>(

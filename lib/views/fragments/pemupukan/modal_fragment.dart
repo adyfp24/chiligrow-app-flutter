@@ -31,25 +31,48 @@ class _ModalPemupukanFragmentState extends State<ModalPemupukanFragment> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             SizedBox(height: 10),
-            TextFormField(
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text('Selang Hari',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+            ),
+            SizedBox(height: 10),
+            TextField(
               controller: _dayController,
+              keyboardType: TextInputType.phone,
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+              ],
               decoration: InputDecoration(
-                labelText: 'Selang Hari',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
                 prefixIcon: Icon(Icons.calendar_view_day_sharp),
+                labelText: '. . . hari sekali',
               ),
+            ),
+            SizedBox(height: 10),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text('Selang Jam',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
             ),
             SizedBox(height: 10),
             TextFormField(
               controller: _timeController,
               decoration: InputDecoration(
-                labelText: 'Selang Waktu',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
                 prefixIcon: Icon(Icons.timer_outlined),
+                labelText: 'jam : menit : detik',
               ),
             ),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                if (_dayController.text.isEmpty || _timeController.text.isEmpty) {
+                if (_dayController.text.isEmpty ||
+                    _timeController.text.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text('Masukkan data dengan benar'),
