@@ -3,11 +3,11 @@ part of 'model.dart';
 class Simulasi {
   final String jenisBibit;
   final int luasLahan;
-  final int kuantitasPupuk;
+  final double kuantitasPupuk;
   final int volumeAir;
   final int jumlahBibit;
-  final int pupukUrea;
-  final int pupukNpk;
+  final double pupukUrea;
+  final double pupukNpk;
 
   Simulasi(
     this.jenisBibit,
@@ -23,11 +23,11 @@ class Simulasi {
     return Simulasi(
         json['jenis_bibit'] as String,
         (json['luas_lahan'] as num).toInt(),
-        (json['kuantitas_pupuk'] as num).toInt(),
+        (json['kuantitas_pupuk'] as num).toDouble(),
         (json['jumlah_bibit'] as num).toInt(),
         (json['volume_air'] as num).toInt(),
-        (json['pupuk_urea'] as num).toInt(),
-        (json['pupuk_npk'] as num).toInt());
+        (json['pupuk_urea'] as num).toDouble(),
+        (json['pupuk_npk'] as num).toDouble());
   }
 
   Map<String, dynamic> toJson() {

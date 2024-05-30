@@ -13,7 +13,7 @@ class HasilSimulasi extends StatelessWidget {
     final jumlahBibit = data['jumlahBibit']!;
     final pupukUrea = data['pupukUrea']!;
     final pupukNpk = data['pupukNpk']!;
-    final volumeAir = data['volumeAir']!;
+    final volumeAir = data['volumeAir'];
     return Scaffold(
       appBar: AppBar(
         title: Text(
