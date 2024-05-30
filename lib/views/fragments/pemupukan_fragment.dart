@@ -74,7 +74,7 @@ class _PemupukanFragmentState extends State<PemupukanFragment>
                 indicatorSize: TabBarIndicatorSize.label,
                 tabs: [
                   Text('Data Jadwal'),
-                  Text('History'),
+                  Text('Riwayat'),
                 ],
                 controller: _tabBarController,
               )

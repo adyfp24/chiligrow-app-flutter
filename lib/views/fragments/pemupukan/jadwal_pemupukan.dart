@@ -11,8 +11,7 @@ class JadwalPemupukan extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _pemupukanProvider =
-        Provider.of<PemupukanProvider>(context, listen: false);
+    final _pemupukanProvider = Provider.of<PemupukanProvider>(context, listen: false);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -35,8 +34,7 @@ class JadwalPemupukan extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       'Kalender Pupuk',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -49,9 +47,7 @@ class JadwalPemupukan extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.calendar_today),
-                          SizedBox(
-                            width: 20,
-                          ),
+                          SizedBox(width: 20),
                           Text(
                             'setiap ${selangHari} hari',
                             style: TextStyle(
@@ -61,16 +57,12 @@ class JadwalPemupukan extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 15,
-                      ),
+                      SizedBox(height: 15),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.av_timer_outlined),
-                          SizedBox(
-                            width: 20,
-                          ),
+                          SizedBox(width: 20),
                           Text(
                             '${selangJam} WIB',
                             style: TextStyle(
@@ -80,26 +72,50 @@ class JadwalPemupukan extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 35,
-                      ),
+                      SizedBox(height: 35),
                       TextButton(
                         onPressed: () {
-                          final idJadwal =
-                              _pemupukanProvider.jadwalPupuk!.idJadwalPupuk;
-                          _pemupukanProvider.deleteJadwal(idJadwal).then((_) {
-                            _pemupukanProvider.getPemupukanData();
-                            homepageKey.currentState?.setSelectedIndex(2);
-                          
-                          }).catchError((error) {
-                            print(error);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                  content: Text(
-                                      'gagal menghapus jadwal: $error')),
-                            );
-                          });
-                          ;
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text("Konfirmasi"),
+                                content: Text("Apakah anda yakin untuk menghapus data?"),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context); // Tutup dialog
+                                    },
+                                    child: Text(
+                                      "Batal",
+                                      style: TextStyle(color: Color.fromARGB(255, 218, 54, 42)),
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      final idJadwal = _pemupukanProvider.jadwalPupuk!.idJadwalPupuk;
+                                      _pemupukanProvider.deleteJadwal(idJadwal).then((_) {
+                                        _pemupukanProvider.getPemupukanData();
+                                        homepageKey.currentState?.setSelectedIndex(2);
+                                        Navigator.pop(context); // Tutup dialog setelah menghapus
+                                      }).catchError((error) {
+                                        print(error);
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            content: Text('Gagal menghapus jadwal: $error'),
+                                          ),
+                                        );
+                                      });
+                                    },
+                                    child: Text(
+                                      "Iya",
+                                      style: TextStyle(color: Color.fromARGB(255, 63, 151, 66)),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                         },
                         child: Align(
                           alignment: Alignment.center,
@@ -111,26 +127,23 @@ class JadwalPemupukan extends StatelessWidget {
                               Text(
                                 'Hapus',
                                 style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
                               ),
                             ],
                           ),
                         ),
                         style: TextButton.styleFrom(
                           backgroundColor: Colors.red[300],
-                          // primary: Colors.white,
-                          padding:
-                              EdgeInsets.symmetric(vertical: 15, horizontal: 0),
+                          padding: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 15,
-                      ),
+                      SizedBox(height: 15),
                       TextButton(
                         onPressed: () {
                           showDialog(
@@ -163,14 +176,12 @@ class JadwalPemupukan extends StatelessWidget {
                         ),
                         style: TextButton.styleFrom(
                           backgroundColor: Color.fromRGBO(0, 133, 117, 1),
-                          // primary: Colors.white,
-                          padding:
-                              EdgeInsets.symmetric(vertical: 15, horizontal: 0),
+                          padding: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

@@ -64,12 +64,12 @@ class HasilSimulasi extends StatelessWidget {
                   ),
                   SizedBox(height: 35),
                   _buildDetailItem(
-                      Icons.task, 'Jarak tanam', '20 cm x 20cm (${luasLahan})'),
+                      Icons.task, 'Jarak tanam', '40 cm x 50cm (${luasLahan} m²)'),
                   _buildDetailItem(
-                      Icons.task, 'Jumlah Bibit', '${jumlahBibit}'),
+                      Icons.task, 'Jumlah Bibit', '${jumlahBibit} bibit'),
                   _buildDetailItem(Icons.task, 'Kuantitas Pupuk',
-                      'Pupuk Npk ${pupukNpk} kg\nPupuk Urea ${pupukUrea} kg'),
-                  _buildDetailItem(Icons.task, 'Volume Air', '${volumeAir}'),
+                      'Pupuk Npk ${pupukNpk} Kg\nPupuk Urea ${pupukUrea} Kg'),
+                  _buildDetailItem(Icons.task, 'Volume Air', '${volumeAir} Liter'),
                   SizedBox(height: 15),
                 ],
               ),

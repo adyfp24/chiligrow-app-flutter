@@ -83,7 +83,7 @@ class _UpdateModalState extends State<UpdateModal> {
                   print(error);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('data jadwal pemupukan gagal diubah'),
+                      content: Text('Harap masukkan data dengan benar'),
                     ),
                   );
                 });

@@ -75,7 +75,7 @@ class _ModalPemupukanFragmentState extends State<ModalPemupukanFragment> {
                     _timeController.text.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('Masukkan data dengan benar'),
+                      content: Text('Harap masukkan data dengan benar'),
                     ),
                   );
                   return;
@@ -87,7 +87,7 @@ class _ModalPemupukanFragmentState extends State<ModalPemupukanFragment> {
                 } catch (e) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('Masukkan data dengan benar'),
+                      content: Text('Harap masukkan data dengan benar'),
                     ),
                   );
                   return;
@@ -96,7 +96,7 @@ class _ModalPemupukanFragmentState extends State<ModalPemupukanFragment> {
                 if (_timeController.text.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('Masukkan data dengan benar'),
+                      content: Text('Harap masukkan data dengan benar'),
                     ),
                   );
                   return;
@@ -117,14 +117,14 @@ class _ModalPemupukanFragmentState extends State<ModalPemupukanFragment> {
                   homepageKey.currentState?.setSelectedIndex(2);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('jadwal berhasil dibuat'),
+                      content: Text('Data berhasil ditambahkan'),
                     ),
                   );
                 }).catchError((error) {
                   print(error);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('Masukkan data dengan benar'),
+                      content: Text('Harap masukkan data dengan benar'),
                     ),
                   );
                 });

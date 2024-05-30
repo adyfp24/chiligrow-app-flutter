@@ -29,6 +29,15 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     String password = _passController.text;
     String confirmPassword = _konfirmPassController.text;
 
+    if (password.isEmpty || confirmPassword.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Kata sandi tidak boleh kosong'),
+        ),
+      );
+      return;
+    }
+
     if (password == confirmPassword) {
       final _userProvider = Provider.of<UserProvider>(context, listen: false);
       _userProvider
@@ -47,7 +56,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Kata sandi dan konfirmasi kata sandi harus sama'),
+          content: Text('Kedua kata sandi tidak sama'),
         ),
       );
     }
