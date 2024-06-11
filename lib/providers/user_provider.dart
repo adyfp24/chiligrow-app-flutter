@@ -135,4 +135,11 @@ class UserProvider extends ChangeNotifier {
     _isLoading = false;
     notifyListeners();
   }
+
+  bool isPetani() {
+    if (_users.isNotEmpty) {
+      return _users.first.role == 'petani';
+    }
+    return false;
+  }
 }

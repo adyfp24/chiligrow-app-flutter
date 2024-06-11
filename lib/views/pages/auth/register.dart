@@ -8,6 +8,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  String? _selectedRole = 'petani'; // Default value set to 'petani'
   late TextEditingController _usernameController;
   late TextEditingController _passwordController;
   late TextEditingController _addressController;
@@ -47,7 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
           child: IntrinsicHeight(
             child: Column(
               children: [
-                SizedBox(height: 100),
+                SizedBox(height: 80),
                 Padding(
                   padding: EdgeInsets.only(left: 35),
                   child: Align(
@@ -136,6 +137,28 @@ class _RegisterPageState extends State<RegisterPage> {
                             labelText: 'No. Telepon',
                           ),
                         ),
+                        SizedBox(height: 25),
+                        DropdownButtonFormField<String>(
+                          value: _selectedRole,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              _selectedRole = newValue;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            labelText: 'Peran',
+                          ),
+                          items: <String>['petani', 'umum']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
                         SizedBox(height: 20),
                         Container(
                           width: double.infinity,
@@ -145,11 +168,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                   _passwordController.text.isEmpty ||
                                   _emailController.text.isEmpty ||
                                   _phoneNumberController.text.isEmpty ||
-                                  _addressController.text.isEmpty) {
+                                  _addressController.text.isEmpty ||
+                                  _selectedRole == null) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                      content: Text(
-                                          'Harap masukkan data dengan benar')),
+                                    content: Text('Harap masukkan data dengan benar'),
+                                  ),
                                 );
                                 return;
                               }
@@ -160,19 +184,18 @@ class _RegisterPageState extends State<RegisterPage> {
                                 alamat: _addressController.text,
                                 email: _emailController.text,
                                 noHP: _phoneNumberController.text,
-                                role: 'petani',
+                                role: _selectedRole!,
                               );
                               Provider.of<UserProvider>(context, listen: false)
                                   .registerUser(newUser)
                                   .then((_) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content: Text('registrasi berhasil')),
+                                  SnackBar(content: Text('Registrasi berhasil')),
                                 );
                                 Navigator.pushNamed(context, '/login');
                               }).catchError((error) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('registrasi gagal')),
+                                  SnackBar(content: Text('Registrasi gagal')),
                                 );
                               });
                             },

@@ -21,6 +21,31 @@ class _PemupukanFragmentState extends State<PemupukanFragment>
     _timeController = TextEditingController();
     _pemupukanProvider = Provider.of<PemupukanProvider>(context, listen: false);
     _tabBarController = TabController(length: 2, vsync: this);
+
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      if (!userProvider.isPetani()) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Akses Ditolak'),
+              content: Text(
+                  'Anda harus login sebagai petani untuk mengakses fitur ini.'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    homepageKey.currentState?.setSelectedIndex(0);
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+    });
   }
 
   @override

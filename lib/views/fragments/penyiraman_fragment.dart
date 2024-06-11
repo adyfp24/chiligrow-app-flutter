@@ -16,6 +16,31 @@ class _PenyiramanFragmentState extends State<PenyiramanFragment> {
     _timer = Timer.periodic(Duration(seconds: 1), (_) {
       Provider.of<SensorProvider>(context, listen: false).getDataSensor();
     });
+
+     WidgetsBinding.instance?.addPostFrameCallback((_) {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      if (!userProvider.isPetani()) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Akses Ditolak'),
+              content: Text(
+                  'Anda harus login sebagai petani untuk mengakses fitur ini.'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    homepageKey.currentState?.setSelectedIndex(0);
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+    });
   }
 
   @override
